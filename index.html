@@ -1,0 +1,3498 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>I Sistemi di Numerazione — Slide Essenziali, Spiegazione Dettagliata &amp; Generatore Esercizi</title>
+  <style>
+    :root {
+      --bg-primary: #0b1120;
+      --bg-secondary: #151f32;
+      --bg-card: #1e293b;
+      --bg-card-hover: #283548;
+      --bg-elevated: #0f172a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-secondary: #818cf8;
+      --accent-glow: rgba(56, 189, 248, 0.22);
+      --bin-green: #10b981;
+      --bin-bg: rgba(16, 185, 129, 0.14);
+      --oct-amber: #f59e0b;
+      --oct-bg: rgba(245, 158, 11, 0.14);
+      --dec-blue: #38bdf8;
+      --dec-bg: rgba(56, 189, 248, 0.14);
+      --hex-purple: #c084fc;
+      --hex-bg: rgba(192, 132, 252, 0.14);
+      --orange-main: #f97316;
+      --orange-bg: rgba(249, 115, 22, 0.14);
+      --lvl-easy: #10b981;
+      --lvl-easy-bg: rgba(16, 185, 129, 0.14);
+      --lvl-med: #f59e0b;
+      --lvl-med-bg: rgba(245, 158, 11, 0.14);
+      --lvl-hard: #f43f5e;
+      --lvl-hard-bg: rgba(244, 63, 94, 0.14);
+      --code-bg: #070b14;
+      --border-color: #334155;
+      --radius: 12px;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f1f5f9;
+      --bg-secondary: #ffffff;
+      --bg-card: #f8fafc;
+      --bg-card-hover: #e2e8f0;
+      --bg-elevated: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-secondary: #4f46e5;
+      --accent-glow: rgba(2, 132, 199, 0.15);
+      --bin-green: #059669;
+      --bin-bg: rgba(5, 150, 105, 0.1);
+      --oct-amber: #d97706;
+      --oct-bg: rgba(217, 119, 6, 0.1);
+      --dec-blue: #0284c7;
+      --dec-bg: rgba(2, 132, 199, 0.1);
+      --hex-purple: #7e22ce;
+      --hex-bg: rgba(126, 34, 206, 0.1);
+      --orange-main: #ea580c;
+      --orange-bg: rgba(234, 88, 12, 0.1);
+      --lvl-easy: #059669;
+      --lvl-easy-bg: rgba(5, 150, 105, 0.12);
+      --lvl-med: #d97706;
+      --lvl-med-bg: rgba(217, 119, 6, 0.12);
+      --lvl-hard: #e11d48;
+      --lvl-hard-bg: rgba(225, 29, 72, 0.12);
+      --code-bg: #0f172a;
+      --border-color: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      line-height: 1.55;
+    }
+
+    /* SIMULATED 9:16 6-INCH PHONE PREVIEW MODE FOR PC DEMO */
+    body.simulate-phone-9-16 {
+      background: #050811;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    body.simulate-phone-9-16 .app-shell {
+      width: 390px;
+      max-width: 100vw;
+      min-height: 844px;
+      border: 8px solid #334155;
+      border-radius: 36px;
+      overflow-x: hidden;
+      background: var(--bg-primary);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header.top-header {
+      width: 100%;
+      max-width: 100%;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 800;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      background: linear-gradient(135deg, var(--bin-green), var(--accent), var(--hex-purple));
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.35);
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    /* MODE SWITCHER (PARTE 1 SLIDE vs PARTE 2 SPIEGAZIONE vs LABORATORIO ESERCIZI) */
+    .mode-switcher {
+      display: inline-flex;
+      background: var(--bg-elevated);
+      padding: 0.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.48rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .mode-btn:hover {
+      color: var(--text-main);
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, var(--orange-main), #ea580c);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(249, 115, 22, 0.35);
+    }
+
+    .mode-btn.part2-btn.active {
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+      color: #0b1120;
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    .mode-btn.lab-btn.active {
+      background: linear-gradient(135deg, var(--bin-green), #059669);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.35);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.45rem 0.8rem;
+      min-height: 38px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0b1120;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+      color: #0b1120;
+      border-color: #7dd3fc;
+    }
+
+    .btn-green {
+      background: var(--bin-bg);
+      color: var(--bin-green);
+      border-color: var(--bin-green);
+      font-weight: 700;
+    }
+
+    .btn-green:hover {
+      background: var(--bin-green);
+      color: #ffffff;
+    }
+
+    .btn-orange {
+      background: var(--orange-bg);
+      color: var(--orange-main);
+      border-color: var(--orange-main);
+      font-weight: 700;
+    }
+
+    .btn-orange:hover {
+      background: var(--orange-main);
+      color: #ffffff;
+    }
+
+    .btn-purple {
+      background: var(--hex-bg);
+      color: var(--hex-purple);
+      border-color: var(--hex-purple);
+      font-weight: 700;
+    }
+
+    .btn-purple:hover {
+      background: var(--hex-purple);
+      color: #ffffff;
+    }
+
+    .slide-progress-container {
+      width: 100%;
+      height: 4px;
+      background: var(--border-color);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .slide-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--bin-green), var(--accent), var(--hex-purple));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* QUICK JUMP PILLS BAR */
+    .quick-jump-bar {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.45rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      overflow-x: auto;
+      font-size: 0.78rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-color) transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .quick-jump-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .quick-jump-bar::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+
+    .module-pill {
+      padding: 0.28rem 0.68rem;
+      border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .module-pill:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+
+    .module-pill.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* MAIN CONTAINER */
+    main.main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 1.25rem 1.25rem 3.5rem;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .view-section {
+      display: none;
+      width: 100%;
+      max-width: 1380px;
+      min-width: 0;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    /* ==========================================
+       PARTE 1: SLIDE ESSENZIALI (16:9 PC & 9:16 PHONE)
+       ========================================== */
+    .slide {
+      display: none;
+      width: 100%;
+      min-width: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: clamp(1rem, 2.5vw, 2rem);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide-split-16-9 > *,
+    .chapter-Grid > *,
+    .guide-controls-grid > *,
+    .generator-grid > * {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .slide-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .lesson-tag {
+      color: var(--orange-main);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+    }
+
+    .badge-group {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .base-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.18rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .badge-bin {
+      background: var(--bin-bg);
+      color: var(--bin-green);
+      border: 1px solid var(--bin-green);
+    }
+
+    .badge-oct {
+      background: var(--oct-bg);
+      color: var(--oct-amber);
+      border: 1px solid var(--oct-amber);
+    }
+
+    .badge-dec {
+      background: var(--dec-bg);
+      color: var(--dec-blue);
+      border: 1px solid var(--dec-blue);
+    }
+
+    .badge-hex {
+      background: var(--hex-bg);
+      color: var(--hex-purple);
+      border: 1px solid var(--hex-purple);
+    }
+
+    .slide-title {
+      font-size: clamp(1.25rem, 3vw, 1.85rem);
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      line-height: 1.25;
+      color: var(--text-main);
+    }
+
+    .slide-subtitle {
+      font-size: clamp(0.88rem, 1.6vw, 1rem);
+      color: var(--text-muted);
+      margin-bottom: 1.15rem;
+      line-height: 1.55;
+    }
+
+    /* 16:9 WIDESCREEN SPLIT LAYOUT FOR SLIDES */
+    .slide-split-16-9 {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.35rem;
+      align-items: start;
+    }
+
+    /* CONCEPT & EXAMPLE CARDS */
+    .concept-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .concept-card h3 {
+      font-size: 0.98rem;
+      color: var(--accent);
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .concept-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .concept-item {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.88rem;
+      overflow-wrap: anywhere;
+    }
+
+    .concept-item.bin-border { border-left-color: var(--bin-green); }
+    .concept-item.oct-border { border-left-color: var(--oct-amber); }
+    .concept-item.dec-border { border-left-color: var(--dec-blue); }
+    .concept-item.hex-border { border-left-color: var(--hex-purple); }
+    .concept-item.orange-border { border-left-color: var(--orange-main); }
+
+    .formula-box {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--orange-main);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin: 0.65rem 0;
+      font-family: var(--font-mono);
+      font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+      color: #f8fafc;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* VISUAL POSITIONAL WEIGHT BOXES */
+    .pos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(56px, 1fr));
+      gap: 0.4rem;
+      margin: 0.65rem 0;
+      text-align: center;
+    }
+
+    .pos-cell {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.45rem 0.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .pos-cell .pos-idx {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .pos-cell .pos-pow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .pos-cell .pos-val {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      background: var(--bg-card);
+      width: 100%;
+      padding: 0.2rem 0;
+      border-radius: 5px;
+    }
+
+    .pos-cell.active-bit {
+      border-color: var(--bin-green);
+      background: var(--bin-bg);
+    }
+
+    .pos-cell.active-bit .pos-val {
+      color: var(--bin-green);
+    }
+
+    /* INTERACTIVE 8-BIT TOGGLE WIDGET IN SLIDE 4 */
+    .bit-interactive-strip {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0.35rem;
+      margin: 0.75rem 0;
+    }
+
+    .bit-toggle-btn {
+      background: var(--bg-elevated);
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.45rem 0.15rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      transition: var(--transition);
+      color: var(--text-main);
+    }
+
+    .bit-toggle-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .bit-toggle-btn.on {
+      background: var(--bin-bg);
+      border-color: var(--bin-green);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .bit-toggle-btn .b-weight {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .bit-toggle-btn.on .b-weight {
+      color: var(--bin-green);
+      font-weight: 700;
+    }
+
+    .bit-toggle-btn .b-digit {
+      font-size: 1.2rem;
+      font-weight: 900;
+      font-family: var(--font-mono);
+    }
+
+    .bit-toggle-btn.on .b-digit {
+      color: var(--bin-green);
+    }
+
+    /* STEP-BY-STEP DIVISION TABLE */
+    .step-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0.65rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table.step-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      font-family: var(--font-mono);
+      min-width: 320px;
+    }
+
+    table.step-table th {
+      background: var(--bg-elevated);
+      color: var(--accent);
+      text-align: left;
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      font-family: var(--font-sans);
+      font-weight: 700;
+    }
+
+    table.step-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    table.step-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .rem-badge {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 5px;
+      font-weight: 800;
+      background: var(--bin-bg);
+      color: var(--bin-green);
+      border: 1px solid var(--bin-green);
+    }
+
+    /* PROGRESSIVE DIFFICULTY EXAMPLE CARDS (PARTE 2) */
+    .examples-progressive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .example-level-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .example-level-card.lvl-1 { border-top: 4px solid var(--lvl-easy); }
+    .example-level-card.lvl-2 { border-top: 4px solid var(--lvl-med); }
+    .example-level-card.lvl-3 { border-top: 4px solid var(--lvl-hard); }
+
+    .lvl-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+
+    .lvl-pill.easy { background: var(--lvl-easy-bg); color: var(--lvl-easy); border: 1px solid var(--lvl-easy); }
+    .lvl-pill.med { background: var(--lvl-med-bg); color: var(--lvl-med); border: 1px solid var(--lvl-med); }
+    .lvl-pill.hard { background: var(--lvl-hard-bg); color: var(--lvl-hard); border: 1px solid var(--lvl-hard); }
+
+    /* ==========================================
+       GENERATORE DI ESERCIZI BINARIO <-> DECIMALE
+       ========================================== */
+    .exercise-generator-box {
+      background: linear-gradient(145deg, var(--bg-secondary), var(--bg-elevated));
+      border: 2px solid var(--bin-green);
+      border-radius: var(--radius);
+      padding: clamp(1rem, 2.5vw, 1.75rem);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 12px 35px rgba(16, 185, 129, 0.15);
+    }
+
+    .generator-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.25rem;
+      margin-top: 1rem;
+      align-items: start;
+    }
+
+    .gen-display-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.15rem;
+    }
+
+    .big-number-problem {
+      background: var(--code-bg);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      margin: 0.85rem 0;
+    }
+
+    .big-number-problem .num-value {
+      font-family: var(--font-mono);
+      font-size: clamp(1.5rem, 4vw, 2.35rem);
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      word-break: break-all;
+    }
+
+    .big-number-problem .num-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .answer-input-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .answer-input {
+      flex: 1;
+      min-width: 170px;
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.65rem 0.9rem;
+      font-size: 1rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      outline: none;
+    }
+
+    .answer-input:focus {
+      border-color: var(--bin-green);
+      box-shadow: 0 0 0 3px var(--bin-bg);
+    }
+
+    .feedback-banner {
+      display: none;
+      margin-top: 0.75rem;
+      padding: 0.7rem 0.95rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .feedback-banner.correct {
+      display: block;
+      background: var(--lvl-easy-bg);
+      color: var(--lvl-easy);
+      border: 1px solid var(--lvl-easy);
+    }
+
+    .feedback-banner.wrong {
+      display: block;
+      background: var(--lvl-hard-bg);
+      color: var(--lvl-hard);
+      border: 1px solid var(--lvl-hard);
+    }
+
+    .solution-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.15rem;
+      min-height: 220px;
+    }
+
+    /* PARTE 2 DETAILS & CHAPTERS */
+    .guide-hero {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(56, 189, 248, 0.14), rgba(192, 132, 252, 0.14));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: clamp(1.1rem, 2.5vw, 1.75rem);
+      margin-bottom: 1.25rem;
+    }
+
+    .guide-controls-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .search-box-wrap, .dropdown-explorer-wrap {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+    }
+
+    .control-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .search-input, .topic-select-dropdown {
+      width: 100%;
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.9rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus, .topic-select-dropdown:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .category-filter-bar {
+      display: flex;
+      gap: 0.45rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .detail-chapter {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: clamp(1rem, 2.5vw, 1.85rem);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .chapter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .chapter-title {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chapter-Grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.35rem;
+      align-items: start;
+    }
+
+    /* COLLAPSIBLE DEEP DIVE */
+    .deep-dive-dropdown {
+      margin-top: 1.25rem;
+      border: 1px solid var(--hex-purple);
+      background: var(--hex-bg);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .deep-dive-dropdown summary {
+      padding: 0.85rem 1.1rem;
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--hex-purple);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      user-select: none;
+    }
+
+    .deep-dive-dropdown summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .deep-dive-body {
+      padding: 1rem 1.1rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid rgba(192, 132, 252, 0.35);
+      font-size: 0.88rem;
+    }
+
+    /* FOOTER NAVIGATION */
+    footer.bottom-footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      bottom: 0;
+      z-index: 50;
+      gap: 0.5rem;
+    }
+
+    /* MODAL INDICE */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 150;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 880px;
+      max-height: 86vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 1.25rem;
+      overflow-y: auto;
+    }
+
+    /* ==========================================
+       RESPONSIVE DESIGN: SMARTPHONE 9:16 (~6 INCHES)
+       AND SIMULATED 9:16 MODE
+       ========================================== */
+    @media (max-width: 960px) {
+      .slide-split-16-9,
+      .chapter-Grid,
+      .guide-controls-grid,
+      .generator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header.top-header {
+        padding: 0.5rem 0.65rem;
+        gap: 0.4rem;
+      }
+      .brand-subtitle-hide-mobile {
+        display: none;
+      }
+      .mode-switcher {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        order: 3;
+      }
+      .mode-btn.lab-btn {
+        grid-column: span 2;
+      }
+      .mode-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.45rem 0.35rem;
+        font-size: 0.76rem;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.2;
+      }
+      .quick-jump-bar {
+        padding: 0.38rem 0.65rem;
+        scrollbar-width: none;
+      }
+      .quick-jump-bar::-webkit-scrollbar {
+        display: none;
+      }
+      main.main-content {
+        padding: 0.55rem 0.5rem 4.2rem;
+      }
+      .slide, .detail-chapter, .exercise-generator-box {
+        padding: 0.85rem 0.7rem;
+        border-radius: 10px;
+      }
+      .concept-card, .gen-display-card, .solution-panel {
+        padding: 0.75rem;
+      }
+      .bit-interactive-strip {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .btn {
+        padding: 0.42rem 0.6rem;
+        font-size: 0.78rem;
+        min-height: 40px;
+      }
+      footer.bottom-footer {
+        padding: 0.45rem 0.6rem;
+      }
+      .hide-on-phone {
+        display: none !important;
+      }
+    }
+
+    /* Apply same mobile rules when 9:16 simulator is active on PC */
+    body.simulate-phone-9-16 .slide-split-16-9,
+    body.simulate-phone-9-16 .chapter-Grid,
+    body.simulate-phone-9-16 .guide-controls-grid,
+    body.simulate-phone-9-16 .generator-grid {
+      grid-template-columns: 1fr;
+    }
+    body.simulate-phone-9-16 .mode-switcher {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      order: 3;
+    }
+    body.simulate-phone-9-16 .mode-btn.lab-btn {
+      grid-column: span 2;
+    }
+    body.simulate-phone-9-16 .mode-btn {
+      width: 100%;
+      justify-content: center;
+      font-size: 0.75rem;
+      padding: 0.45rem 0.35rem;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.2;
+    }
+    body.simulate-phone-9-16 .bit-interactive-strip {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    body.simulate-phone-9-16 main.main-content {
+      padding: 0.65rem 0.6rem 2rem;
+    }
+    body.simulate-phone-9-16 .slide,
+    body.simulate-phone-9-16 .detail-chapter,
+    body.simulate-phone-9-16 .exercise-generator-box {
+      padding: 0.9rem 0.75rem;
+    }
+    body.simulate-phone-9-16 .brand-subtitle-hide-mobile {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- TOP HEADER -->
+  <header class="top-header">
+    <div class="brand" onclick="switchMode('slides'); goToSlide(0);" title="Torna all'inizio">
+      <div class="brand-icon">01<br>10</div>
+      <div>
+        <div>Sistemi di Numerazione</div>
+        <div class="brand-subtitle-hide-mobile" style="font-size:0.72rem; color:var(--text-muted); font-weight:500;">Binario (2) • Ottale (8) • Decimale (10) • Esadecimale (16)</div>
+      </div>
+    </div>
+
+    <!-- SELETTORE DELLE PARTI RICHIESTE + ACCESSO RAPIDO AL GENERATORE ESERCIZI -->
+    <div class="mode-switcher" role="tablist" aria-label="Modalità Lezione">
+      <button id="btnModeSlides" class="mode-btn active" onclick="switchMode('slides')" role="tab" aria-selected="true">
+        🎞️ Parte 1: Slide Essenziali
+      </button>
+      <button id="btnModeGuide" class="mode-btn part2-btn" onclick="switchMode('guide')" role="tab" aria-selected="false">
+        📖 Parte 2: Spiegazione &amp; Esempi
+      </button>
+      <button id="btnModeLab" class="mode-btn lab-btn" onclick="openExerciseGenerator()" role="tab" aria-selected="false">
+        🎲 Esercizi Binario ↔ Decimale
+      </button>
+    </div>
+
+    <div class="nav-controls">
+      <button class="btn hide-on-phone" id="btnPhoneSim" onclick="togglePhoneSim()" title="Simula schermo Smartphone 9:16 (6 pollici) o PC 16:9">
+        📱 Vista 9:16 (6")
+      </button>
+      <button class="btn" onclick="openIndexModal()" title="Indice rapido degli argomenti">
+        📑 Indice
+      </button>
+      <button class="btn" id="themeBtn" onclick="toggleTheme()" title="Cambia Tema Chiaro/Scuro">
+        ☀️
+      </button>
+    </div>
+
+    <div class="slide-progress-container">
+      <div class="slide-progress-bar" id="progressBar"></div>
+    </div>
+  </header>
+
+  <!-- BARRA PILLS RAPIDA PER LE SLIDE -->
+  <nav class="quick-jump-bar" id="quickJumpBar" aria-label="Navigazione rapida slide"></nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- =====================================================================
+         PARTE 1: 12 SLIDE CON CONCETTI ESSENZIALI ED ESEMPI SEMPLICI
+         ===================================================================== -->
+    <section id="viewSlides" class="view-section active" aria-label="Parte 1: Slide Concetti Essenziali">
+
+      <!-- SLIDE 1: COSA SONO I SISTEMI DI NUMERAZIONE -->
+      <article class="slide active" data-title="01. Cosa sono">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 01 / 12 • Concetti Base</span>
+          <div class="badge-group">
+            <span class="base-badge badge-dec">Additivi vs Posizionali</span>
+            <span class="base-badge badge-bin">Cifra ≠ Numero</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Cosa sono i Sistemi di Numerazione?</h1>
+        <p class="slide-subtitle">Un <strong>sistema di numerazione</strong> è un insieme di <strong>simboli (cifre)</strong> e di <strong>regole</strong> che permettono di rappresentare qualsiasi quantità numerica.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>📌 Concetti Essenziali da Ricordare</h3>
+              <div class="concept-list">
+                <div class="concept-item dec-border">
+                  <strong>Numero vs Numerale (Cifre):</strong> Il <em>numero</em> è il concetto astratto di quantità (es. dodici oggetti), mentre il <em>numerale</em> è il modo in cui lo scriviamo usando le cifre: <code>12</code> in decimale, <code>1100</code> in binario, <code>C</code> in esadecimale, <code>XII</code> nei numeri romani.
+                </div>
+                <div class="concept-item orange-border">
+                  <strong>Sistemi Additivi (NON posizionali):</strong> Ogni simbolo ha <em>sempre lo stesso valore</em> indipendentemente dalla posizione (es. <strong>Numeri Romani</strong>: in <code>XXX</code> ogni <code>X</code> vale sempre 10, quindi <code>10 + 10 + 10 = 30</code>). Poco pratici per i calcoli!
+                </div>
+                <div class="concept-item bin-border">
+                  <strong>Sistemi Posizionali (i nostri!):</strong> Il valore di una cifra <strong>dipende dalla posizione</strong> che occupa all'interno del numero. Ogni posizione ha un <strong>peso</strong> legato alla <strong>Base (b)</strong>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>💡 Esempio Semplice: Perché la posizione conta?</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.65rem;">Osserva la cifra <code>5</code> nel numero decimale <strong>525</strong>:</p>
+              <div class="pos-grid">
+                <div class="pos-cell active-bit">
+                  <span class="pos-idx">Posizione 2</span>
+                  <span class="pos-pow">Centinaia (10²)</span>
+                  <span class="pos-val">5</span>
+                  <span style="font-size:0.75rem; color:var(--bin-green);">Vale 500</span>
+                </div>
+                <div class="pos-cell">
+                  <span class="pos-idx">Posizione 1</span>
+                  <span class="pos-pow">Decine (10¹)</span>
+                  <span class="pos-val">2</span>
+                  <span style="font-size:0.75rem; color:var(--text-muted);">Vale 20</span>
+                </div>
+                <div class="pos-cell active-bit">
+                  <span class="pos-idx">Posizione 0</span>
+                  <span class="pos-pow">Unità (10⁰)</span>
+                  <span class="pos-val">5</span>
+                  <span style="font-size:0.75rem; color:var(--bin-green);">Vale 5</span>
+                </div>
+              </div>
+              <div class="formula-box">
+                525₁₀ = (5 × 100) + (2 × 10) + (5 × 1) = 500 + 20 + 5
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted);">
+                ✅ <strong>Valore Assoluto:</strong> è la cifra in sé (<code>5</code>).<br>
+                ✅ <strong>Valore Relativo (Posizionale):</strong> è il valore assunto in base alla posizione (<code>500</code> a sinistra, <code>5</code> a destra).
+              </p>
+              <div style="margin-top:0.75rem; display:flex; justify-content:flex-end;">
+                <button class="btn btn-primary" onclick="openChapterInGuide('cap-1')">📖 Approfondisci nel Cap. 1 →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 2: LA BASE E LA LEGGE POSIZIONALE -->
+      <article class="slide" data-title="02. Base e Polinomi">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 02 / 12 • Legge Posizionale</span>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Base 2</span>
+            <span class="base-badge badge-oct">Base 8</span>
+            <span class="base-badge badge-dec">Base 10</span>
+            <span class="base-badge badge-hex">Base 16</span>
+          </div>
+        </div>
+        <h1 class="slide-title">La Base (b) e la Forma Polinomiale</h1>
+        <p class="slide-subtitle">La <strong>Base <em>b</em></strong> di un sistema posizionale indica <strong>quante cifre diverse</strong> si usano (sempre da <code>0</code> a <code>b − 1</code>) e per quale potenza si moltiplica ogni posizione.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>📐 Regola Universale dei Sistemi Posizionali</h3>
+              <div class="concept-list">
+                <div class="concept-item dec-border">
+                  <strong>1. Alfabeto delle cifre:</strong> Un sistema in base <code>b</code> possiede esattamente <code>b</code> simboli, che vanno da <code>0</code> fino a <code>b - 1</code>. (In base 10 la cifra massima è 9; in base 2 la cifra massima è 1; in base 8 è 7).
+                </div>
+                <div class="concept-item orange-border">
+                  <strong>2. Numerazione delle posizioni:</strong> Le posizioni si contano <strong>da destra verso sinistra</strong> partendo sempre da <strong>posizione 0</strong>!
+                </div>
+                <div class="concept-item bin-border">
+                  <strong>3. Peso della posizione <em>i</em>:</strong> La posizione <code>i</code> ha peso pari a <strong>b<sup>i</sup></strong> (ricorda che qualsiasi numero elevato a zero vale 1: <code>b⁰ = 1</code>).
+                </div>
+              </div>
+              <div class="formula-box">
+                N = cₙ·bⁿ + ... + c₂·b² + c₁·b¹ + c₀·b⁰
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>🌍 I 4 Sistemi fondamentali in Informatica</h3>
+              <div class="step-table-wrap">
+                <table class="step-table">
+                  <thead>
+                    <tr>
+                      <th>Sistema</th>
+                      <th>Base</th>
+                      <th>Cifre disponibili (Alfabeto)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong style="color:var(--bin-green);">Binario</strong></td>
+                      <td><code>2</code></td>
+                      <td><code>0, 1</code> (2 simboli)</td>
+                    </tr>
+                    <tr>
+                      <td><strong style="color:var(--oct-amber);">Ottale</strong></td>
+                      <td><code>8</code></td>
+                      <td><code>0, 1, 2, 3, 4, 5, 6, 7</code> (8 simboli)</td>
+                    </tr>
+                    <tr>
+                      <td><strong style="color:var(--dec-blue);">Decimale</strong></td>
+                      <td><code>10</code></td>
+                      <td><code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code> (10 simboli)</td>
+                    </tr>
+                    <tr>
+                      <td><strong style="color:var(--hex-purple);">Esadecimale</strong></td>
+                      <td><code>16</code></td>
+                      <td><code>0..9, A, B, C, D, E, F</code> (16 simboli)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.4rem;">
+                💡 <strong>Notazione con pedice:</strong> Per evitare ambiguità (es. <code>10</code> vale dieci in decimale, ma vale due in binario!), si scrive la base come pedice: <code>10₂ = 2₁₀</code>, <code>10₈ = 8₁₀</code>, <code>10₁₆ = 16₁₀</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 3: IL SISTEMA DECIMALE (BASE 10) -->
+      <article class="slide" data-title="03. Decimale (Base 10)">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 03 / 12 • Approfondimento Base 10</span>
+          <div class="badge-group">
+            <span class="base-badge badge-dec">Base 10</span>
+            <span class="base-badge badge-dec">Cifre: 0 – 9</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Il Sistema Decimale (Base 10)</h1>
+        <p class="slide-subtitle">È il sistema usato quotidianamente dagli esseri umani fin dall'antichità perché abbiamo <strong>10 dita delle mani</strong>. Usa dieci cifre da <code>0</code> a <code>9</code>.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>🔢 I Pesi del Sistema Decimale (Potenze di 10)</h3>
+              <div class="pos-grid">
+                <div class="pos-cell">
+                  <span class="pos-idx">Pos. 3</span>
+                  <span class="pos-pow">10³</span>
+                  <span class="pos-val">1000</span>
+                  <span style="font-size:0.7rem; color:var(--text-muted);">Migliaia</span>
+                </div>
+                <div class="pos-cell">
+                  <span class="pos-idx">Pos. 2</span>
+                  <span class="pos-pow">10²</span>
+                  <span class="pos-val">100</span>
+                  <span style="font-size:0.7rem; color:var(--text-muted);">Centinaia</span>
+                </div>
+                <div class="pos-cell">
+                  <span class="pos-idx">Pos. 1</span>
+                  <span class="pos-pow">10¹</span>
+                  <span class="pos-val">10</span>
+                  <span style="font-size:0.7rem; color:var(--text-muted);">Decine</span>
+                </div>
+                <div class="pos-cell">
+                  <span class="pos-idx">Pos. 0</span>
+                  <span class="pos-pow">10⁰</span>
+                  <span class="pos-val">1</span>
+                  <span style="font-size:0.7rem; color:var(--text-muted);">Unità</span>
+                </div>
+              </div>
+              <div class="concept-item dec-border" style="margin-top:0.65rem;">
+                <strong>Cosa succede quando finiscono le cifre?</strong> Arrivati a <code>9</code>, non esiste un singolo simbolo per il dieci: si azzera la colonna delle unità (<code>0</code>) e si aggiunge <strong>1 riporto</strong> a sinistra nella colonna delle decine → nasce <code>10</code>!
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>📝 Esempio Semplice: Scomposizione di 3047₁₀</h3>
+              <p style="font-size:0.86rem; color:var(--text-muted);">Scomponiamo il numero <strong>3047₁₀</strong> usando i pesi posizionali da destra verso sinistra:</p>
+              <div class="formula-box">
+                Posizione 0 (10⁰ = 1)    → 7 × 1    =    7<br>
+                Posizione 1 (10¹ = 10)   → 4 × 10   =   40<br>
+                Posizione 2 (10² = 100)  → 0 × 100  =    0<br>
+                Posizione 3 (10³ = 1000) → 3 × 1000 = 3000<br>
+                ------------------------------------------<br>
+                Somma totale = 3000 + 0 + 40 + 7 = 3047₁₀
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted);">
+                ⚠️ <strong>Importanza dello zero (0):</strong> Anche se <code>0 × 100 = 0</code>, lo zero è indispensabile come <em>segnaposto</em> per mantenere il <code>3</code> nella posizione delle migliaia! Senza lo zero leggeremmo <code>347</code>.
+              </p>
+              <div style="margin-top:0.75rem; display:flex; justify-content:flex-end;">
+                <button class="btn btn-primary" onclick="openChapterInGuide('cap-2')">📖 Approfondisci nel Cap. 2 →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 4: IL SISTEMA BINARIO (BASE 2) CON INTERRUTTORI INTERATTIVI -->
+      <article class="slide" data-title="04. Binario (Base 2)">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 04 / 12 • Approfondimento Base 2</span>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Base 2</span>
+            <span class="base-badge badge-bin">Bit: 0 e 1</span>
+            <span class="base-badge badge-dec">1 Byte = 8 Bit</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Il Sistema Binario (Base 2)</h1>
+        <p class="slide-subtitle">È la lingua madre dei computer: i circuiti elettronici (transistor) distinguono facilmente solo <strong>due stati fisici</strong>: Spento/Assenza di tensione (<code>0</code>) e Acceso/Presenza di tensione (<code>1</code>).</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>⚡ Concetti Chiave del Binario</h3>
+              <div class="concept-list">
+                <div class="concept-item bin-border">
+                  <strong>Bit (Binary Digit):</strong> È l'unità minima di informazione: una singola cifra binaria che può valere solo <code>0</code> oppure <code>1</code>.
+                </div>
+                <div class="concept-item dec-border">
+                  <strong>Nibble (4 bit) e Byte (8 bit):</strong>
+                  <br>• <strong>1 Nibble = 4 bit</strong> → rappresenta $2^4 = 16$ combinazioni (da <code>0</code> a <code>15</code>).
+                  <br>• <strong>1 Byte = 8 bit</strong> → rappresenta $2^8 = 256$ combinazioni (da <code>0</code> a <code>255</code>).
+                </div>
+                <div class="concept-item orange-border">
+                  <strong>MSB e LSB:</strong> Il bit più a sinistra si chiama <strong>MSB</strong> (<em>Most Significant Bit</em>, ha il peso maggiore), quello più a destra <strong>LSB</strong> (<em>Least Significant Bit</em>, vale $2^0=1$ e indica se il numero è <strong>pari=0</strong> o <strong>dispari=1</strong>!).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>🎛️ Prova tu! Simulatore Interattivo di 1 Byte (8 Bit)</h3>
+              <p style="font-size:0.83rem; color:var(--text-muted);">Tocca o clicca sui bit qui sotto per accenderli (<code>1</code>) o spegnerli (<code>0</code>) e osserva i pesi delle potenze di 2:</p>
+              <div class="bit-interactive-strip" id="slideBitStrip">
+                <!-- Populated by JS -->
+              </div>
+              <div class="formula-box" id="slideBitFormula" style="text-align:center;">
+                00010101₂ = 16 + 4 + 1 = 21₁₀
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                <span style="font-size:0.8rem; color:var(--text-muted);">Potenze di 2 da sapere a memoria: <code>1, 2, 4, 8, 16, 32, 64, 128</code></span>
+                <button class="btn btn-green" onclick="openChapterInGuide('cap-3')">📖 Cap. 3 Binario →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 5: CONVERSIONE BINARIO -> DECIMALE -->
+      <article class="slide" data-title="05. Binario → Decimale">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 05 / 12 • Conversione Base 2 → Base 10</span>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Binario (2)</span>
+            <span>➔</span>
+            <span class="base-badge badge-dec">Decimale (10)</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Conversione da Binario a Decimale</h1>
+        <p class="slide-subtitle">Per convertire un numero binario in decimale basta <strong>sommare le potenze di 2 (pesi)</strong> corrispondenti alle sole posizioni in cui il bit vale <strong>1</strong>.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>🪜 Procedimento in 3 Passi Semplici</h3>
+              <div class="concept-list">
+                <div class="concept-item bin-border">
+                  <strong>Passo 1:</strong> Scrivi i bit del numero binario e sopra (o sotto) ciascuno annota la posizione da destra a sinistra partendo da <code>0</code>: <code>0, 1, 2, 3, 4...</code>
+                </div>
+                <div class="concept-item dec-border">
+                  <strong>Passo 2:</strong> Associa a ogni posizione la corrispondente potenza di 2: <code>1, 2, 4, 8, 16, 32, 64, 128...</code> (ogni peso a sinistra è il doppio del precedente!).
+                </div>
+                <div class="concept-item orange-border">
+                  <strong>Passo 3:</strong> Ignora gli zeri (<code>0</code>) e <strong>somma solo i pesi dove c'è <code>1</code></strong>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>💡 Esempio Semplice: Convertire <code>11010₂</code> in Decimale</h3>
+              <div class="pos-grid">
+                <div class="pos-cell active-bit">
+                  <span class="pos-idx">Pos. 4</span>
+                  <span class="pos-pow">2⁴ = 16</span>
+                  <span class="pos-val">1</span>
+                  <span style="font-size:0.75rem; color:var(--bin-green);">+16</span>
+                </div>
+                <div class="pos-cell active-bit">
+                  <span class="pos-idx">Pos. 3</span>
+                  <span class="pos-pow">2³ = 8</span>
+                  <span class="pos-val">1</span>
+                  <span style="font-size:0.75rem; color:var(--bin-green);">+8</span>
+                </div>
+                <div class="pos-cell">
+                  <span class="pos-idx">Pos. 2</span>
+                  <span class="pos-pow">2² = 4</span>
+                  <span class="pos-val">0</span>
+                  <span style="font-size:0.75rem; color:var(--text-muted);">+0</span>
+                </div>
+                <div class="pos-cell active-bit">
+                  <span class="pos-idx">Pos. 1</span>
+                  <span class="pos-pow">2¹ = 2</span>
+                  <span class="pos-val">1</span>
+                  <span style="font-size:0.75rem; color:var(--bin-green);">+2</span>
+                </div>
+                <div class="pos-cell">
+                  <span class="pos-idx">Pos. 0</span>
+                  <span class="pos-pow">2⁰ = 1</span>
+                  <span class="pos-val">0</span>
+                  <span style="font-size:0.75rem; color:var(--text-muted);">+0</span>
+                </div>
+              </div>
+              <div class="formula-box">
+                11010₂ = (1×2⁴) + (1×2³) + (0×2²) + (1×2¹) + (0×2⁰)<br>
+                       = 16 + 8 + 0 + 2 + 0 = <strong>26₁₀</strong>
+              </div>
+              <p style="font-size:0.83rem; color:var(--text-muted);">
+                🔎 <strong>Controllo veloce:</strong> L'ultimo bit a destra (LSB) di <code>11010₂</code> è <code>0</code>, quindi il risultato decimale doveva essere <strong>pari</strong> (infatti <code>26</code> è pari!).
+              </p>
+              <div style="margin-top:0.65rem; display:flex; gap:0.5rem; justify-content:flex-end; flex-wrap:wrap;">
+                <button class="btn btn-green" onclick="openExerciseGenerator('bin2dec')">🎲 Esercitati su Bin → Dec</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 6: CONVERSIONE DECIMALE -> BINARIO -->
+      <article class="slide" data-title="06. Decimale → Binario">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 06 / 12 • Conversione Base 10 → Base 2</span>
+          <div class="badge-group">
+            <span class="base-badge badge-dec">Decimale (10)</span>
+            <span>➔</span>
+            <span class="base-badge badge-bin">Binario (2)</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Conversione da Decimale a Binario</h1>
+        <p class="slide-subtitle">Si utilizza il <strong>metodo delle divisioni successive per 2</strong>: si divide ripetutamente il numero per 2 annotando i resti (<code>0</code> o <code>1</code>) finché il quoziente diventa <strong>0</strong>.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>🪜 Metodo delle Divisioni Successive per 2</h3>
+              <div class="concept-list">
+                <div class="concept-item dec-border">
+                  <strong>1. Dividi per 2:</strong> Se il numero è <strong>pari</strong> il resto è <code>0</code>; se il numero è <strong>dispari</strong> il resto è <code>1</code>.
+                </div>
+                <div class="concept-item orange-border">
+                  <strong>2. Continua fino a Quoziente = 0:</strong> Prendi il quoziente intero ottenuto e dividilo ancora per 2, finché non arrivi a <code>Quoziente = 0</code>.
+                </div>
+                <div class="concept-item bin-border">
+                  <strong>3. Leggi i resti DAL BASSO VERSO L'ALTO (⬆️):</strong> L'ultimo resto ottenuto è il bit più significativo (<strong>MSB</strong>, va scritto per primo a sinistra), mentre il primo resto è l'<strong>LSB</strong> (va a destra)!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>💡 Esempio Semplice: Convertire <code>25₁₀</code> in Binario</h3>
+              <div class="step-table-wrap">
+                <table class="step-table">
+                  <thead>
+                    <tr>
+                      <th>Divisione (: 2)</th>
+                      <th>Quoziente</th>
+                      <th>Resto (Bit)</th>
+                      <th>Ordine lettura ⬆️</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>25 : 2</td>
+                      <td>12</td>
+                      <td><span class="rem-badge">1</span></td>
+                      <td>Ultimo bit a destra (LSB)</td>
+                    </tr>
+                    <tr>
+                      <td>12 : 2</td>
+                      <td>6</td>
+                      <td><span class="rem-badge">0</span></td>
+                      <td>⬆️</td>
+                    </tr>
+                    <tr>
+                      <td>6 : 2</td>
+                      <td>3</td>
+                      <td><span class="rem-badge">0</span></td>
+                      <td>⬆️</td>
+                    </tr>
+                    <tr>
+                      <td>3 : 2</td>
+                      <td>1</td>
+                      <td><span class="rem-badge">1</span></td>
+                      <td>⬆️</td>
+                    </tr>
+                    <tr>
+                      <td>1 : 2</td>
+                      <td><strong>0 (Fine!)</strong></td>
+                      <td><span class="rem-badge">1</span></td>
+                      <td><strong>Primo bit a sinistra (MSB)</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="formula-box">
+                Leggendo i resti dal basso verso l'alto (⬆️): <strong>25₁₀ = 11001₂</strong><br>
+                Verifica: 16 + 8 + 0 + 0 + 1 = 25₁₀ ✅
+              </div>
+              <div style="display:flex; justify-content:flex-end;">
+                <button class="btn btn-green" onclick="openExerciseGenerator('dec2bin')">🎲 Esercitati su Dec → Bin</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 7: IL SISTEMA OTTALE (BASE 8) -->
+      <article class="slide" data-title="07. Ottale (Base 8)">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 07 / 12 • Sistema Ottale</span>
+          <div class="badge-group">
+            <span class="base-badge badge-oct">Base 8</span>
+            <span class="base-badge badge-oct">Cifre: 0 – 7</span>
+            <span class="base-badge badge-bin">1 Cifra Ottale = 3 Bit</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Il Sistema Ottale (Base 8)</h1>
+        <p class="slide-subtitle">Il sistema <strong>Ottale (Base 8)</strong> utilizza <strong>8 cifre da <code>0</code> a <code>7</code></strong> (attenzione: le cifre <code>8</code> e <code>9</code> NON esistono in ottale!). Poiché $8 = 2^3$, ogni cifra ottale corrisponde esattamente a <strong>3 bit</strong>.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>🟠 Concetti Essenziali sull'Ottale</h3>
+              <div class="concept-list">
+                <div class="concept-item oct-border">
+                  <strong>Pesi delle posizioni (Potenze di 8):</strong> Da destra verso sinistra i pesi sono $8^0 = 1$, $8^1 = 8$, $8^2 = 64$, $8^3 = 512$, ecc.
+                </div>
+                <div class="concept-item bin-border">
+                  <strong>Perché è nato in informatica?</strong> Scrivere lunghe sequenze di bit (es. <code>111101101₂</code>) è scomodo e porta a errori umani. Raggruppando i bit <strong>a 3 a 3</strong> da destra si ottiene subito il numero ottale (<code>755₈</code>)!
+                </div>
+                <div class="concept-item dec-border">
+                  <strong>Dove si usa oggi?</strong> Nei sistemi operativi <strong>Linux / Unix</strong> per indicare i permessi dei file: ad esempio il comando <code>chmod 755</code> usa tre cifre ottali per i permessi <code>rwx</code> (Lettura=4, Scrittura=2, Esecuzione=1).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>💡 Esempi Semplici in Base 8</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);"><strong>1) Da Ottale a Decimale:</strong> quanto vale <code>147₈</code> in base 10?</p>
+              <div class="formula-box">
+                Posizioni:  2     1     0<br>
+                Pesi (8ⁱ): 8²=64 8¹=8  8⁰=1<br>
+                Cifre:      1     4     7<br>
+                ----------------------------------------<br>
+                147₈ = (1 × 64) + (4 × 8) + (7 × 1)<br>
+                     = 64 + 32 + 7 = <strong>103₁₀</strong>
+              </div>
+              <p style="font-size:0.85rem; color:var(--text-muted);"><strong>2) Da Decimale a Ottale:</strong> convertire <code>103₁₀</code> dividendo per 8:</p>
+              <div class="formula-box">
+                103 : 8 = 12  con resto <strong>7</strong> (LSB)<br>
+                 12 : 8 =  1  con resto <strong>4</strong> ⬆️<br>
+                  1 : 8 =  0  con resto <strong>1</strong> (MSB) → <strong>147₈</strong>
+              </div>
+              <div style="display:flex; justify-content:flex-end;">
+                <button class="btn btn-orange" onclick="openChapterInGuide('cap-5')">📖 Approfondisci nel Cap. 5 →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 8: IL SISTEMA ESADECIMALE / SESSADECIMALE (BASE 16) -->
+      <article class="slide" data-title="08. Esadecimale (Base 16)">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 08 / 12 • Sistema Esadecimale (Sessadecimale)</span>
+          <div class="badge-group">
+            <span class="base-badge badge-hex">Base 16 (HEX)</span>
+            <span class="base-badge badge-hex">0–9 e A–F</span>
+            <span class="base-badge badge-bin">1 Cifra Hex = 4 Bit (1 Nibble)</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Il Sistema Esadecimale / Sessadecimale (Base 16)</h1>
+        <p class="slide-subtitle">Usa <strong>16 simboli</strong>: le dieci cifre da <code>0</code> a <code>9</code> più le prime sei lettere dell'alfabeto <strong><code>A, B, C, D, E, F</code></strong> per indicare i valori da 10 a 15. Poiché $16 = 2^4$, <strong>1 cifra esadecimale = 4 bit (1 Nibble)</strong>.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>🟣 Le Lettere Esadecimali (da sapere a memoria!)</h3>
+              <div class="pos-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--hex-purple);">HEX → DEC</span><span class="pos-val">A = 10</span><span class="pos-idx">1010₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--hex-purple);">HEX → DEC</span><span class="pos-val">B = 11</span><span class="pos-idx">1011₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--hex-purple);">HEX → DEC</span><span class="pos-val">C = 12</span><span class="pos-idx">1100₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--hex-purple);">HEX → DEC</span><span class="pos-val">D = 13</span><span class="pos-idx">1101₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--hex-purple);">HEX → DEC</span><span class="pos-val">E = 14</span><span class="pos-idx">1110₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--hex-purple);">HEX → DEC</span><span class="pos-val">F = 15</span><span class="pos-idx">1111₂</span></div>
+              </div>
+              <div class="concept-item hex-border" style="margin-top:0.55rem;">
+                <strong>Perché è il sistema più amato dai programmatori?</strong><br>
+                Un <strong>Byte (8 bit)</strong> si divide esattamente in <strong>2 Nibble da 4 bit</strong>, quindi qualsiasi Byte (da <code>00000000₂</code> a <code>11111111₂</code>) si scrive con <strong>sole 2 cifre esadecimali</strong> (da <code>00₁₆</code> a <code>FF₁₆</code>)!
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>💡 Esempio Semplice e Applicazioni Reali</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted);">Convertiamo <strong><code>2F₁₆</code></strong> in Decimale (ricorda: <code>F = 15</code>, pesi $16^1=16$ e $16^0=1$):</p>
+              <div class="formula-box">
+                2F₁₆ = (2 × 16¹) + (F × 16⁰)<br>
+                     = (2 × 16)  + (15 × 1)<br>
+                     = 32 + 15 = <strong>47₁₀</strong>
+              </div>
+              <div class="concept-list">
+                <div class="concept-item dec-border">
+                  🎨 <strong>Colori Web HTML/CSS (RGB):</strong> <code>#FF5733</code> sono 3 byte esadecimali: <code>FF</code> (255 Rosso), <code>57</code> (87 Verde), <code>33</code> (51 Blu).
+                </div>
+                <div class="concept-item bin-border">
+                  🖧 <strong>Indirizzi di Rete &amp; Memoria:</strong> Indirizzi MAC (<code>00:1A:2B:3C:4D:5E</code>), IPv6 e indirizzi dei puntatori in RAM in linguaggio C (prefisso <code>0x</code>, es. <code>0x7FFF</code>).
+                </div>
+              </div>
+              <div style="margin-top:0.65rem; display:flex; justify-content:flex-end;">
+                <button class="btn btn-purple" onclick="openChapterInGuide('cap-6')">📖 Approfondisci nel Cap. 6 →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 9: CONVERSIONI RAPIDE TRA BINARIO, OTTALE ED ESADECIMALE -->
+      <article class="slide" data-title="09. Conversioni Rapide 2-8-16">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 09 / 12 • Scorciatoie a Gruppi di Bit</span>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Binario ↔ Ottale (3 bit)</span>
+            <span class="base-badge badge-hex">Binario ↔ Esadecimale (4 bit)</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Conversioni Rapide: Binario ↔ Ottale ↔ Esadecimale</h1>
+        <p class="slide-subtitle">Poiché <strong>8 = 2³</strong> e <strong>16 = 2⁴</strong> sono potenze di 2, per convertire tra Binario, Ottale ed Esadecimale <strong>NON serve passare dal Decimale</strong>! Basta raggruppare i bit partendo da destra.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>⚡ Regola dei Gruppi da 3 Bit (Ottale)</h3>
+              <p style="font-size:0.86rem; color:var(--text-muted);">Dividi il numero binario in <strong>gruppi di 3 bit da destra verso sinistra</strong> (aggiungendo zeri a sinistra se serve) e converti ogni terna (pesi <code>4-2-1</code>):</p>
+              <div class="formula-box">
+                Convertire <strong>10111001₂</strong> in Ottale (Base 8):<br><br>
+                1) Raggruppa a 3 bit da destra:  <strong>010</strong> | <strong>111</strong> | <strong>001</strong><br>
+                2) Converti ogni terna (4-2-1):   <strong>2</strong>  |  <strong>7</strong>  |  <strong>1</strong><br>
+                Risultato immediato: <strong>10111001₂ = 271₈</strong>
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted);">
+                🔄 <strong>Viceversa (Ottale → Binario):</strong> Sostituisci ogni cifra ottale con i suoi 3 bit: <code>53₈</code> → <code>5 = 101</code>, <code>3 = 011</code> → <code>101011₂</code>.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>⚡ Regola dei Gruppi da 4 Bit / Nibble (Esadecimale)</h3>
+              <p style="font-size:0.86rem; color:var(--text-muted);">Dividi il numero binario in <strong>gruppi di 4 bit da destra verso sinistra</strong> e converti ogni quartina (pesi <code>8-4-2-1</code>):</p>
+              <div class="formula-box">
+                Convertire lo stesso <strong>10111001₂</strong> in Esadecimale:<br><br>
+                1) Raggruppa a 4 bit da destra:  <strong>1011</strong>    | <strong>1001</strong><br>
+                2) Somma i pesi (8-4-2-1):       8+2+1=11 | 8+1=9<br>
+                3) Converti in simbolo Hex:         <strong>B</strong>    |   <strong>9</strong><br>
+                Risultato immediato: <strong>10111001₂ = B9₁₆</strong>
+              </div>
+              <p style="font-size:0.84rem; color:var(--text-muted);">
+                🔄 <strong>E tra Ottale ed Esadecimale?</strong> Usa il <strong>Binario come ponte</strong>! Es: <code>271₈</code> → <code>010 111 001₂</code> → raggruppa a 4 bit <code>1011 1001₂</code> → <code>B9₁₆</code>!
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 10: OPERAZIONI ARITMETICHE IN BINARIO -->
+      <article class="slide" data-title="10. Aritmetica Binaria">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 10 / 12 • Calcolo Binario</span>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Somma Binaria</span>
+            <span class="base-badge badge-oct">Riporto (Carry)</span>
+            <span class="base-badge badge-hex">Overflow</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Somma in Binario e Concetto di Overflow</h1>
+        <p class="slide-subtitle">Nella CPU del computer tutte le operazioni matematiche avvengono in binario tramite circuiti logici chiamati <em>sommatori (Adder)</em>.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="concept-card">
+              <h3>➕ Le 4 Regole della Somma Binaria</h3>
+              <div class="concept-list">
+                <div class="concept-item bin-border"><code>0 + 0 = 0</code> (con riporto 0)</div>
+                <div class="concept-item bin-border"><code>0 + 1 = 1</code> (con riporto 0)</div>
+                <div class="concept-item bin-border"><code>1 + 0 = 1</code> (con riporto 0)</div>
+                <div class="concept-item orange-border">
+                  <strong><code>1 + 1 = 0</code> con RIPORTO di <code>1</code></strong> alla colonna a sinistra! (Perché in decimale $1+1=2$, che in binario si scrive <code>10₂</code>).
+                </div>
+                <div class="concept-item hex-border">
+                  <strong>Caso con riporto precedente:</strong> <code>1 + 1 + 1 (riporto) = 1</code> con <strong>riporto di <code>1</code></strong> (perché $1+1+1=3$, che in binario è <code>11₂</code>).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>💡 Esempio Semplice in Colonna: <code>1011₂ + 0110₂</code></h3>
+              <div class="formula-box">
+                Riporti:   ¹ ¹ ¹ 0<br>
+                           1 0 1 1₂ +   (vale 11₁₀)<br>
+                           0 1 1 0₂ =   (vale  6₁₀)<br>
+                         ------------<br>
+                         <strong>1 0 0 0 1₂</strong>     (vale 16 + 1 = 17₁₀ ✅)
+              </div>
+              <div class="concept-item orange-border">
+                ⚠️ <strong>Attenzione all'Overflow:</strong> Se lavoriamo con un registro fisso a <strong>4 bit</strong>, il risultato <code>10001₂</code> richiede <strong>5 bit</strong>! Il quinto bit a sinistra esce fuori dallo spazio disponibile generando un errore di <strong>Overflow</strong> (traboccamento).
+              </div>
+              <div style="margin-top:0.65rem; display:flex; justify-content:flex-end;">
+                <button class="btn btn-primary" onclick="openChapterInGuide('cap-7')">📖 Approfondisci nel Cap. 7 →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 11: TABELLA DI RIFERIMENTO COMPLETA (0 - 15) -->
+      <article class="slide" data-title="11. Tabella Riepilogo">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 11 / 12 • Scheda di Ripasso Rapido</span>
+          <div class="badge-group">
+            <span class="base-badge badge-dec">DEC (10)</span>
+            <span class="base-badge badge-bin">BIN (2)</span>
+            <span class="base-badge badge-oct">OCT (8)</span>
+            <span class="base-badge badge-hex">HEX (16)</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Tabella di Confronto Rapido (da 0 a 15)</h1>
+        <p class="slide-subtitle">Questa tabella mostra i primi 16 numeri naturali (tutti i possibili valori di un <strong>Nibble da 4 bit</strong>) nei quattro sistemi di numerazione.</p>
+
+        <div class="slide-split-16-9">
+          <div>
+            <div class="step-table-wrap">
+              <table class="step-table" style="text-align:center;">
+                <thead>
+                  <tr>
+                    <th style="text-align:center;">Decimale (10)</th>
+                    <th style="text-align:center;">Binario (4 bit)</th>
+                    <th style="text-align:center;">Ottale (8)</th>
+                    <th style="text-align:center;">Esadecimale (16)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>0</td><td><code>0000</code></td><td>0</td><td><strong>0</strong></td></tr>
+                  <tr><td>1</td><td><code>0001</code></td><td>1</td><td><strong>1</strong></td></tr>
+                  <tr><td>2</td><td><code>0010</code></td><td>2</td><td><strong>2</strong></td></tr>
+                  <tr><td>3</td><td><code>0011</code></td><td>3</td><td><strong>3</strong></td></tr>
+                  <tr><td>4</td><td><code>0100</code></td><td>4</td><td><strong>4</strong></td></tr>
+                  <tr><td>5</td><td><code>0101</code></td><td>5</td><td><strong>5</strong></td></tr>
+                  <tr><td>6</td><td><code>0110</code></td><td>6</td><td><strong>6</strong></td></tr>
+                  <tr><td>7</td><td><code>0111</code></td><td>7</td><td><strong>7</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <div class="step-table-wrap">
+              <table class="step-table" style="text-align:center;">
+                <thead>
+                  <tr>
+                    <th style="text-align:center;">Decimale (10)</th>
+                    <th style="text-align:center;">Binario (4 bit)</th>
+                    <th style="text-align:center;">Ottale (8)</th>
+                    <th style="text-align:center;">Esadecimale (16)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>8</td><td><code>1000</code></td><td>10</td><td><strong>8</strong></td></tr>
+                  <tr><td>9</td><td><code>1001</code></td><td>11</td><td><strong>9</strong></td></tr>
+                  <tr><td>10</td><td><code>1010</code></td><td>12</td><td><strong style="color:var(--hex-purple);">A</strong></td></tr>
+                  <tr><td>11</td><td><code>1011</code></td><td>13</td><td><strong style="color:var(--hex-purple);">B</strong></td></tr>
+                  <tr><td>12</td><td><code>1100</code></td><td>14</td><td><strong style="color:var(--hex-purple);">C</strong></td></tr>
+                  <tr><td>13</td><td><code>1101</code></td><td>15</td><td><strong style="color:var(--hex-purple);">D</strong></td></tr>
+                  <tr><td>14</td><td><code>1110</code></td><td>16</td><td><strong style="color:var(--hex-purple);">E</strong></td></tr>
+                  <tr><td>15</td><td><code>1111</code></td><td>17</td><td><strong style="color:var(--hex-purple);">F</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SLIDE 12: PONTE VERSO IL GENERATORE DI ESERCIZI E PARTE 2 -->
+      <article class="slide" data-title="12. Esercizi & Parte 2">
+        <div class="slide-meta">
+          <span class="lesson-tag">Slide 12 / 12 • Mettiti alla Prova!</span>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Generatore Casuale</span>
+            <span class="base-badge badge-dec">Soluzione Passo-Passo</span>
+          </div>
+        </div>
+        <h1 class="slide-title">Pronto per Esercitarti e Approfondire?</h1>
+        <p class="slide-subtitle">Hai completato le slide con i concetti essenziali! Ora passa alla <strong>Parte 2 (Spiegazione Dettagliata con Esempi a Difficoltà Progressiva)</strong> oppure allenati con il <strong>Generatore di Esercizi Binario ↔ Decimale</strong>.</p>
+
+        <div class="slide-split-16-9">
+          <div class="concept-card" style="border-color:var(--bin-green);">
+            <h3>🎲 Generatore Interattivo di Esercizi (Binario ↔ Decimale)</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.85rem;">
+              Genera infiniti numeri casuali su 3 livelli di difficoltà (Base, Intermedio, Avanzato), prova a inserire il risultato e premi il tasto <strong>"Mostra Soluzione che Applica la Conversione"</strong> per vedere tutte le divisioni per 2 o la somma delle potenze di 2 passo-passo!
+            </p>
+            <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+              <button class="btn btn-green" onclick="openExerciseGenerator('dec2bin')">🎲 Genera Esercizio Decimale → Binario</button>
+              <button class="btn btn-primary" onclick="openExerciseGenerator('bin2dec')">🎲 Genera Esercizio Binario → Decimale</button>
+            </div>
+          </div>
+
+          <div class="concept-card" style="border-color:var(--accent);">
+            <h3>📖 Parte 2: Spiegazione Completa con Difficoltà Progressiva</h3>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.85rem;">
+              Studia la guida completa con tutti i dettagli teorici, i casi particolari (numeri con la virgola, complemento a 2, schema di Horner) e <strong>3 esempi graduati (🟢 Base, 🟡 Intermedio, 🔴 Avanzato)</strong> per ciascun argomento.
+            </p>
+            <button class="btn btn-orange" onclick="switchMode('guide')">📖 Vai alla Parte 2: Spiegazione Dettagliata Completa →</button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- =====================================================================
+         PARTE 2: SPIEGAZIONE DETTAGLIATA COMPLETA CON ESEMPI A DIFFICOLTÀ
+                  PROGRESSIVA + GENERATORE DI ESERCIZI BINARIO <-> DECIMALE
+         ===================================================================== -->
+    <section id="viewGuide" class="view-section" aria-label="Parte 2: Spiegazione Dettagliata Completa ed Esercizi">
+
+      <!-- HERO & RICERCA RAPIDA PARTE 2 -->
+      <div class="guide-hero">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:0.75rem;">
+          <div>
+            <span class="lesson-tag">Parte 2 • Manuale Completo &amp; Laboratorio Interattivo</span>
+            <h1 style="font-size:clamp(1.35rem, 3vw, 2rem); font-weight:900; margin-top:0.2rem;">
+              Spiegazione Dettagliata, Esempi Progressivi &amp; Generatore Esercizi
+            </h1>
+            <p style="color:var(--text-muted); font-size:0.94rem; margin-top:0.25rem;">
+              Approfondimento completo sui sistemi <strong>Binario (Base 2)</strong>, <strong>Ottale (Base 8)</strong>, <strong>Decimale (Base 10)</strong> ed <strong>Esadecimale / Sessadecimale (Base 16)</strong> con esempi graduati (🟢 Base → 🟡 Intermedio → 🔴 Avanzato) e generatore automatico di esercizi svolti passo-passo.
+            </p>
+          </div>
+          <button class="btn btn-orange" onclick="switchMode('slides')">🎞️ Torna alle Slide Essenziali</button>
+        </div>
+
+        <div class="guide-controls-grid">
+          <div class="search-box-wrap">
+            <label class="control-label" for="guideSearchInput">🔍 Cerca argomento, regola o esempio (es. "divisioni", "esadecimale", "byte", "complemento")</label>
+            <input type="search" id="guideSearchInput" class="search-input" placeholder="Digita per filtrare i capitoli in tempo reale..." oninput="filterGuideChapters(this.value)">
+          </div>
+          <div class="dropdown-explorer-wrap">
+            <label class="control-label" for="chapterQuickSelect">📑 Vai direttamente a un Capitolo o al Generatore</label>
+            <select id="chapterQuickSelect" class="topic-select-dropdown" onchange="if(this.value) { scrollToChapter(this.value); this.value=''; }">
+              <option value="">— Seleziona una sezione da raggiungere —</option>
+              <option value="gen-esercizi">🎲 Generatore di Esercizi Binario ↔ Decimale (con Soluzione Svolta)</option>
+              <option value="cap-1">Cap. 1 — Fondamenti: Sistemi Additivi vs Posizionali e Legge Polinomiale</option>
+              <option value="cap-2">Cap. 2 — Approfondimento Sistema Decimale (Base 10) + 3 Esempi Progressivi</option>
+              <option value="cap-3">Cap. 3 — Approfondimento Sistema Binario (Base 2), Bit e Byte + 3 Esempi Progressivi</option>
+              <option value="cap-4">Cap. 4 — Conversioni Binario ↔ Decimale (Interi e Frazionari) + 6 Esempi Progressivi</option>
+              <option value="cap-5">Cap. 5 — Il Sistema Ottale (Base 8) e Gruppi da 3 Bit + 3 Esempi Progressivi</option>
+              <option value="cap-6">Cap. 6 — Il Sistema Esadecimale / Sessadecimale (Base 16) + 3 Esempi Progressivi</option>
+              <option value="cap-7">Cap. 7 — Aritmetica Binaria, Overflow e Numeri Negativi (Complemento a 2)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- BARRA RAPIDA DEI CAPITOLI -->
+      <div class="category-filter-bar" aria-label="Indice capitoli Parte 2">
+        <button class="module-pill active" onclick="scrollToChapter('gen-esercizi')">🎲 Generatore Esercizi Bin↔Dec</button>
+        <button class="module-pill" onclick="scrollToChapter('cap-1')">1. Fondamenti &amp; Base b</button>
+        <button class="module-pill" onclick="scrollToChapter('cap-2')">2. Sistema Decimale (10)</button>
+        <button class="module-pill" onclick="scrollToChapter('cap-3')">3. Sistema Binario (2)</button>
+        <button class="module-pill" onclick="scrollToChapter('cap-4')">4. Conversioni Bin ↔ Dec</button>
+        <button class="module-pill" onclick="scrollToChapter('cap-5')">5. Sistema Ottale (8)</button>
+        <button class="module-pill" onclick="scrollToChapter('cap-6')">6. Sistema Esadecimale (16)</button>
+        <button class="module-pill" onclick="scrollToChapter('cap-7')">7. Aritmetica &amp; Complemento a 2</button>
+      </div>
+
+      <!-- ===================================================================
+           SEZIONE INTERATTIVA: GENERATORE DI ESERCIZI BINARIO <-> DECIMALE
+           =================================================================== -->
+      <section class="exercise-generator-box" id="gen-esercizi">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem;">
+          <div>
+            <span class="lesson-tag" style="color:var(--bin-green);">Laboratorio Interattivo • Allenamento &amp; Verifica</span>
+            <h2 style="font-size:clamp(1.2rem, 2.5vw, 1.65rem); font-weight:900;">
+              🎲 Generatore di Esercizi di Conversione Binario ↔ Decimale
+            </h2>
+            <p style="font-size:0.88rem; color:var(--text-muted);">
+              Genera numeri casuali, metti alla prova le tue capacità oppure clicca su <strong>"💡 Mostra Soluzione che Applica la Conversione"</strong> per vedere tutti i passaggi matematici svolti (divisioni successive per 2 o somma pesata delle potenze di 2).
+            </p>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-bin" id="scoreBadge">✔️ Corretti: 0 / 0</span>
+          </div>
+        </div>
+
+        <div class="generator-grid">
+          <!-- COLONNA SINISTRA: CONTROLLI + PROBLEMA GENERATO + VERIFICA -->
+          <div class="gen-display-card">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:0.65rem; margin-bottom:0.85rem;">
+              <div>
+                <label class="control-label" for="genDirection">🔄 Tipo di Conversione</label>
+                <select id="genDirection" class="topic-select-dropdown" onchange="generateNewExercise()">
+                  <option value="dec2bin">Decimale (10) ➔ Binario (2)</option>
+                  <option value="bin2dec">Binario (2) ➔ Decimale (10)</option>
+                  <option value="mixed">Casuale Mista (Dec↔Bin)</option>
+                </select>
+              </div>
+              <div>
+                <label class="control-label" for="genDifficulty">📈 Livello Difficoltà</label>
+                <select id="genDifficulty" class="topic-select-dropdown" onchange="generateNewExercise()">
+                  <option value="easy">🟢 Livello 1: Base (da 3 a 31 • fino a 5 bit)</option>
+                  <option value="med" selected>🟡 Livello 2: Intermedio (da 32 a 255 • 1 Byte)</option>
+                  <option value="hard">🔴 Livello 3: Avanzato (da 256 a 1023 • 10 bit)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <button class="btn btn-green" style="flex:1;" onclick="generateNewExercise()">
+                🎲 Genera Nuovo Numero Casuale
+              </button>
+              <button class="btn btn-orange" style="flex:1;" onclick="showExerciseSolution()">
+                💡 Mostra Soluzione che Applica la Conversione
+              </button>
+            </div>
+
+            <!-- RIQUADRO DEL NUMERO ESTRATTO -->
+            <div class="big-number-problem">
+              <div style="font-size:0.8rem; font-weight:700; text-transform:uppercase; color:var(--text-muted);" id="problemPromptLabel">
+                Converti da DECIMALE (Base 10) a BINARIO (Base 2):
+              </div>
+              <div class="num-value" id="problemNumberDisplay">42₁₀</div>
+              <div class="num-sub" id="problemHintSub">Suggerimento: dividi ripetutamente per 2 e leggi i resti dal basso verso l'alto (⬆️).</div>
+            </div>
+
+            <!-- INPUT PER TENTARE LA RISPOSTA -->
+            <div>
+              <label class="control-label" for="userAnswerInput" id="userAnswerLabel">✍️ Inserisci la tua risposta in Binario (solo 0 e 1):</label>
+              <div class="answer-input-row">
+                <input type="text" id="userAnswerInput" class="answer-input" placeholder="Es. 101010" onkeydown="if(event.key==='Enter') checkUserAnswer();">
+                <button class="btn btn-primary" onclick="checkUserAnswer()">✔️ Verifica Risposta</button>
+              </div>
+              <div id="exerciseFeedback" class="feedback-banner"></div>
+            </div>
+
+            <!-- MINI CALCOLATORE SU NUMERO SCELTO DALL'UTENTE -->
+            <div style="margin-top:1rem; padding-top:0.85rem; border-top:1px dashed var(--border-color);">
+              <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:0.4rem;">
+                🛠️ Vuoi vedere la conversione passo-passo di un numero specifico (es. un esercizio assegnato in classe)?
+              </div>
+              <div class="answer-input-row">
+                <input type="text" id="customNumberInput" class="answer-input" style="font-size:0.88rem; padding:0.45rem 0.75rem;" placeholder="Scrivi un decimale (es. 156) o binario (es. 101101b)">
+                <button class="btn" onclick="solveCustomNumber('dec2bin')">Converti Dec→Bin</button>
+                <button class="btn" onclick="solveCustomNumber('bin2dec')">Converti Bin→Dec</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLONNA DESTRA: SOLUZIONE PASSO-PASSO CHE APPLICA LA CONVERSIONE -->
+          <div class="solution-panel" id="solutionPanel">
+            <h3 style="font-size:1rem; color:var(--accent); margin-bottom:0.5rem;">
+              📐 Svolgimento Passo-Passo della Conversione
+            </h3>
+            <p style="font-size:0.88rem; color:var(--text-muted);">
+              Prova a risolvere l'esercizio a sinistra oppure premi il pulsante <strong>"💡 Mostra Soluzione che Applica la Conversione"</strong> per visualizzare qui tutti i calcoli completi (tabella delle divisioni successive per 2 con resti, oppure tabella dei pesi posizionali $2^i$ e somma dettagliata).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CAPITOLO 1: FONDAMENTI DEI SISTEMI DI NUMERAZIONE
+           =================================================================== -->
+      <article class="detail-chapter" id="cap-1" data-keywords="fondamenti sistemi numerazione additivi posizionali romano base cifre alfabeto teorema rappresentazione polinomiale msb lsb">
+        <div class="chapter-header">
+          <div>
+            <span class="lesson-tag">Capitolo 1 • Fondamenti Teorici</span>
+            <h2 class="chapter-title">1. Sistemi di Numerazione: Additivi vs Posizionali e Legge Polinomiale</h2>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-dec">Teorema Posizionale</span>
+            <span class="base-badge badge-bin">Base b ≥ 2</span>
+          </div>
+        </div>
+
+        <div class="chapter-Grid">
+          <div>
+            <h3 style="color:var(--accent); font-size:1.02rem; margin-bottom:0.5rem;">📚 Spiegazione Dettagliata</h3>
+            <p style="font-size:0.9rem; margin-bottom:0.65rem;">
+              Un <strong>sistema di numerazione</strong> è definito da una coppia di elementi: un <strong>alfabeto di simboli</strong> (detti <em>cifre</em>) e un insieme di <strong>regole sintattiche</strong> che associano a ogni sequenza di cifre uno e un solo valore numerico. Nel corso della storia umana i sistemi di numerazione si sono divisi in due grandi famiglie:
+            </p>
+            <div class="concept-list">
+              <div class="concept-item orange-border">
+                <strong>1. Sistemi Additivi (o non posizionali):</strong> Ad ogni simbolo è associato un valore fisso. Il numero rappresentato è la somma (o differenza, come nel sistema romano) dei valori dei singoli simboli. Esempio: nel sistema romano <code>I=1, V=5, X=10, L=50, C=100, D=500, M=1000</code>. Nel numero <code>CCC</code> (300) tutte e tre le <code>C</code> valgono sempre 100. <em>Svantaggio enorme:</em> non esiste lo zero e svolgere moltiplicazioni o divisioni in colonna è quasi impossibile!
+              </div>
+              <div class="concept-item bin-border">
+                <strong>2. Sistemi Posizionali:</strong> Introducono il concetto rivoluzionario di <strong>Base $b$</strong> (con $b \ge 2$ intero) e il simbolo dello <strong>Zero (<code>0</code>)</strong>. L'alfabeto contiene esattamente $b$ cifre distinte: $\{0, 1, 2, \dots, b-1\}$. Ogni cifra possiede:
+                <br>• un <strong>valore assoluto (intrinseco)</strong>: la quantità indicata dalla cifra presa singolarmente;
+                <br>• un <strong>valore relativo (posizionale)</strong>: dato dal prodotto della cifra per la potenza $b^i$, dove $i$ è l'indice della posizione contato da destra verso sinistra partendo da $0$.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>📐 Teorema Fondamentale (Forma Polinomiale)</h3>
+              <p style="font-size:0.86rem; color:var(--text-muted);">
+                Qualsiasi numero intero positivo $N$ scritto in base $b$ come sequenza di $n$ cifre $(c_{n-1} c_{n-2} \dots c_1 c_0)_b$ ha valore pari al polinomio:
+              </p>
+              <div class="formula-box">
+                N = cₙ₋₁·bⁿ⁻¹ + cₙ₋₂·bⁿ⁻² + ... + c₁·b¹ + c₀·b⁰
+              </div>
+              <p style="font-size:0.85rem; color:var(--text-muted);">
+                Se il numero possiede anche una <strong>parte frazionaria</strong> dopo la virgola $(c_{n-1}\dots c_0 , c_{-1} c_{-2})_b$, le posizioni a destra della virgola hanno esponenti <strong>negativi</strong> ($b^{-1} = \frac{1}{b}$, $b^{-2} = \frac{1}{b^2}$, ecc.):
+              </p>
+              <div class="formula-box">
+                Parte frazionaria = c₋₁·b⁻¹ + c₋₂·b⁻² + c₋₃·b⁻³ + ...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESEMPI PROGRESSIVI CAPITOLO 1 -->
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Cap. 1</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base</span>
+            <strong>Riconoscere se un numero è valido in una certa Base</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              La scrittura <code>1042</code> è valida in base 10, base 8, base 4 e base 2?
+            </p>
+            <div class="formula-box" style="margin:0;">
+              Regola: tutte le cifre devono essere &lt; b.<br>
+              La cifra più alta in "1042" è 4.<br>
+              • Base 10 (cifre 0..9): VALIDO ✅<br>
+              • Base 8  (cifre 0..7): VALIDO ✅<br>
+              • Base 4  (cifre 0..3): NON VALIDO ❌ (il 4 non esiste in base 4!)<br>
+              • Base 2  (cifre 0..1): NON VALIDO ❌
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio</span>
+            <strong>Sviluppo Polinomiale in una Base generica (Base 5)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Calcola il valore decimale del numero <code>234₅</code> (scritto nel sistema quinario, Base 5):
+            </p>
+            <div class="formula-box" style="margin:0;">
+              Posizioni da destra: 4 (pos 0), 3 (pos 1), 2 (pos 2)<br>
+              Pesi in base 5: 5⁰=1, 5¹=5, 5²=25<br>
+              234₅ = (2 × 5²) + (3 × 5¹) + (4 × 5⁰)<br>
+                   = (2 × 25) + (3 × 5)  + (4 × 1)<br>
+                   = 50 + 15 + 4 = <strong>69₁₀</strong>
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato</span>
+            <strong>Trovare la Base incognita <em>b</em> da un'uguaglianza</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              In quale base $b$ vale l'uguaglianza <code>23_b = 19₁₀</code>?
+            </p>
+            <div class="formula-box" style="margin:0;">
+              Sviluppiamo 23 in base b:<br>
+              (2 × b¹) + (3 × b⁰) = 19<br>
+              2b + 3 = 19<br>
+              2b = 19 - 3  ➔  2b = 16  ➔  <strong>b = 8 (Sistema Ottale!)</strong><br>
+              Verifica: 23₈ = 2×8 + 3 = 19₁₀ ✅
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===================================================================
+           CAPITOLO 2: APPROFONDIMENTO SISTEMA DECIMALE (BASE 10)
+           =================================================================== -->
+      <article class="detail-chapter" id="cap-2" data-keywords="sistema decimale base 10 potenze di dieci scomposizione polinomiale virgola frazionari">
+        <div class="chapter-header">
+          <div>
+            <span class="lesson-tag">Capitolo 2 • Approfondimento Sistema Decimale</span>
+            <h2 class="chapter-title">2. Il Sistema Decimale (Base 10): Struttura, Potenze e Numeri Reali</h2>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-dec">Base b = 10</span>
+            <span class="base-badge badge-dec">Alfabeto: {0,1,2,3,4,5,6,7,8,9}</span>
+          </div>
+        </div>
+
+        <div class="chapter-Grid">
+          <div>
+            <h3 style="color:var(--accent); font-size:1.02rem; margin-bottom:0.5rem;">📚 Perché è fondamentale padroneggiare la struttura della Base 10?</h3>
+            <p style="font-size:0.9rem; margin-bottom:0.65rem;">
+              Spesso usiamo il sistema decimale in modo automatico senza riflettere sui suoi meccanismi interni. Capire a fondo come funziona il <strong>sistema decimale</strong> rende immediata la comprensione del sistema binario, ottale ed esadecimale, perché <strong>le regole matematiche sono identiche</strong>: cambia soltanto il valore della base $b$!
+            </p>
+            <div class="concept-list">
+              <div class="concept-item dec-border">
+                <strong>Regola del Riporto (Carry) in Base 10:</strong> Quando sommiamo <code>1</code> alla cifra massima dell'alfabeto (<code>9</code>), non abbiamo altri simboli. Quindi rimettiamo a <code>0</code> la posizione corrente e generiamo un riporto di <code>1</code> nella posizione immediatamente a sinistra (che pesa 10 volte di più).
+              </div>
+              <div class="concept-item orange-border">
+                <strong>Massimo numero con $n$ cifre decimali:</strong> Con $n$ cifre in base 10 possiamo rappresentare esattamente $10^n$ numeri diversi, da $0$ fino a $10^n - 1$. Ad esempio con $n=3$ cifre rappresentiamo $10^3 = 1000$ numeri: da <code>000</code> a <code>999</code> ($1000 - 1$).
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>📊 Tabella dei Pesi in Base 10 (Interi e Decimali)</h3>
+              <div class="step-table-wrap">
+                <table class="step-table">
+                  <thead>
+                    <tr>
+                      <th>Nome Posizione</th>
+                      <th>Indice <em>i</em></th>
+                      <th>Potenza 10<sup>i</sup></th>
+                      <th>Valore del Peso</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Decine di migliaia</td><td><code>+4</code></td><td>10⁴</td><td>10.000</td></tr>
+                    <tr><td>Migliaia (k)</td><td><code>+3</code></td><td>10³</td><td>1.000</td></tr>
+                    <tr><td>Centinaia (h)</td><td><code>+2</code></td><td>10²</td><td>100</td></tr>
+                    <tr><td>Decine (da)</td><td><code>+1</code></td><td>10¹</td><td>10</td></tr>
+                    <tr><td><strong>Unità (u)</strong></td><td><code>0</code></td><td><strong>10⁰</strong></td><td><strong>1</strong></td></tr>
+                    <tr><td>Decimi (d)</td><td><code>-1</code></td><td>10⁻¹</td><td>0,1 (1/10)</td></tr>
+                    <tr><td>Centesimi (c)</td><td><code>-2</code></td><td>10⁻²</td><td>0,01 (1/100)</td></tr>
+                    <tr><td>Millèsimi (m)</td><td><code>-3</code></td><td>10⁻³</td><td>0,001 (1/1000)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESEMPI PROGRESSIVI CAPITOLO 2 -->
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Cap. 2 (Sistema Decimale)</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base</span>
+            <strong>Scomposizione Polinomiale di un Intero (472₁₀)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Scrivi il numero <code>472₁₀</code> in forma polinomiale esplicitando gli esponenti:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              472₁₀ = 4×10² + 7×10¹ + 2×10⁰<br>
+                    = 4×100 + 7×10 + 2×1<br>
+                    = 400 + 70 + 2 = 472₁₀
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio</span>
+            <strong>Numeri con Zeri Interni e Grandi Ordini (50.809₁₀)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Analizza il peso di ciascuna cifra in <code>50809₁₀</code>:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              Posizioni: 5(pos 4), 0(pos 3), 8(pos 2), 0(pos 1), 9(pos 0)<br>
+              = 5×10⁴ + 0×10³ + 8×10² + 0×10¹ + 9×10⁰<br>
+              = 50.000 + 0 + 800 + 0 + 9 = 50.809₁₀
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato</span>
+            <strong>Numero Reale con Parte Frazionaria (63,25₁₀)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Scomponi <code>63,25₁₀</code> usando potenze positive e negative di 10:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              63,25₁₀ = 6×10¹ + 3×10⁰ + 2×10⁻¹ + 5×10⁻²<br>
+                      = 60 + 3 + (2 × 0,1) + (5 × 0,01)<br>
+                      = 60 + 3 + 0,2 + 0,05 = 63,25₁₀
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===================================================================
+           CAPITOLO 3: APPROFONDIMENTO SISTEMA BINARIO (BASE 2)
+           =================================================================== -->
+      <article class="detail-chapter" id="cap-3" data-keywords="sistema binario base 2 bit byte nibble potenze di due msb lsb combinazioni 2^n">
+        <div class="chapter-header">
+          <div>
+            <span class="lesson-tag">Capitolo 3 • Approfondimento Sistema Binario</span>
+            <h2 class="chapter-title">3. Il Sistema Binario (Base 2): Bit, Byte, Potenze di 2 e Capacità di Rappresentazione</h2>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Base b = 2</span>
+            <span class="base-badge badge-bin">Alfabeto: {0, 1}</span>
+            <span class="base-badge badge-dec">2ⁿ Combinazioni</span>
+          </div>
+        </div>
+
+        <div class="chapter-Grid">
+          <div>
+            <h3 style="color:var(--bin-green); font-size:1.02rem; margin-bottom:0.5rem;">📚 Perché i Computer usano la Base 2?</h3>
+            <p style="font-size:0.9rem; margin-bottom:0.65rem;">
+              All'interno di un processore (CPU) o di una memoria RAM ci sono miliardi di microscopici interruttori elettronici chiamati <strong>transistor</strong>. Costruire circuiti che debbano distinguere 10 livelli diversi di tensione elettrica (per le cifre 0..9) sarebbe lentissimo e soggetto a errori dovuti al rumore elettrico. Distinguere invece solo <strong>due stati opposti</strong> (Bassa tensione $\approx 0\text{ V} \rightarrow \text{bit } 0$; Alta tensione $\approx 1.2\text{ V} - 5\text{ V} \rightarrow \text{bit } 1$) garantisce <strong>massima velocità e totale affidabilità</strong>!
+            </p>
+            <div class="concept-list">
+              <div class="concept-item bin-border">
+                <strong>Quante configurazioni diverse con $n$ bit?</strong><br>
+                Con $n$ bit si possono formare esattamente <strong>$2^n$ configurazioni distinte</strong>, che rappresentano i numeri interi naturali da <strong>$0$</strong> fino a <strong>$2^n - 1$</strong>:
+                <br>• Con <strong>4 bit (1 Nibble)</strong>: $2^4 = 16$ valori $\rightarrow$ da $0$ (<code>0000₂</code>) a $15$ (<code>1111₂</code>).
+                <br>• Con <strong>8 bit (1 Byte)</strong>: $2^8 = 256$ valori $\rightarrow$ da $0$ (<code>00000000₂</code>) a $255$ (<code>11111111₂</code>).
+                <br>• Con <strong>16 bit (2 Byte)</strong>: $2^{16} = 65.536$ valori $\rightarrow$ da $0$ a $65.535$.
+              </div>
+              <div class="concept-item orange-border">
+                <strong>Formula inversa (Quanti bit servono per $M$ elementi?):</strong><br>
+                Per codificare $M$ informazioni diverse occorre scegliere il più piccolo intero $n$ tale che $2^n \ge M$, ovvero $n = \lceil \log_2(M) \rceil$.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>⚡ Tabella delle Potenze di 2 (Fondamentale!)</h3>
+              <div class="step-table-wrap">
+                <table class="step-table">
+                  <thead>
+                    <tr>
+                      <th>Potenza 2<sup>n</sup></th>
+                      <th>Valore Decimale</th>
+                      <th>Significato Informatico</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>2⁰</code></td><td><strong>1</strong></td><td>Peso del bit meno significativo (LSB)</td></tr>
+                    <tr><td><code>2¹</code></td><td><strong>2</strong></td><td>2 stati possibili con 1 bit</td></tr>
+                    <tr><td><code>2²</code></td><td><strong>4</strong></td><td>4 combinazioni con 2 bit</td></tr>
+                    <tr><td><code>2³</code></td><td><strong>8</strong></td><td>1 cifra Ottale (3 bit)</td></tr>
+                    <tr><td><code>2⁴</code></td><td><strong>16</strong></td><td>1 Nibble / 1 cifra Esadecimale (4 bit)</td></tr>
+                    <tr><td><code>2⁵, 2⁶, 2⁷</code></td><td><strong>32, 64, 128</strong></td><td>128 è il peso dell'MSB di 1 Byte (pos. 7)</td></tr>
+                    <tr><td><code>2⁸</code></td><td><strong>256</strong></td><td>Combinazioni di <strong>1 Byte</strong> (0..255)</td></tr>
+                    <tr><td><code>2¹⁰</code></td><td><strong>1.024</strong></td><td><strong>1 KiB</strong> (Kibibyte $\approx$ 1 Kilobyte)</td></tr>
+                    <tr><td><code>2¹⁶</code></td><td><strong>65.536</strong></td><td>Combinazioni di 2 Byte (16 bit)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESEMPI PROGRESSIVI CAPITOLO 3 -->
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Cap. 3 (Sistema Binario)</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base</span>
+            <strong>Pari/Dispari e Valore Massimo con $n$ bit</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              1) Senza convertire, stabilisci se <code>10110110₂</code> è pari o dispari.<br>
+              2) Qual è il numero massimo rappresentabile con 6 bit?
+            </p>
+            <div class="formula-box" style="margin:0;">
+              1) L'ultimo bit a destra (LSB, peso 2⁰=1) è <strong>0</strong>:<br>
+                 tutte le altre potenze di 2 sono pari, quindi il numero è <strong>PARI</strong>!<br><br>
+              2) Con n = 6 bit:<br>
+                 Valore max = 2⁶ - 1 = 64 - 1 = <strong>63₁₀</strong> (ovvero 111111₂).
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio</span>
+            <strong>Quanti bit servono per codificare gli studenti di una scuola?</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Una scuola ha <strong>600 studenti</strong>. Quanti bit servono come minimo per assegnare un codice binario univoco a ciascuno studente?
+            </p>
+            <div class="formula-box" style="margin:0;">
+              Cerchiamo la potenza di 2 immediatamente ≥ 600:<br>
+              • Con 9 bit:  2⁹ = 512 combinazioni (NON bastano per 600!)<br>
+              • Con 10 bit: 2¹⁰ = 1024 combinazioni (BASTANO! ✅)<br>
+              Risposta: servono almeno <strong>10 bit</strong> (avanzano 1024 - 600 = 424 codici liberi).
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato</span>
+            <strong>Moltiplicazione e Divisione rapida per potenze di 2 (Shift)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Cosa succede al valore di <code>1101₂</code> ($13_{10}$) se aggiungiamo due zeri a destra (<code>110100₂</code>) oppure se togliamo l'ultimo bit a destra?
+            </p>
+            <div class="formula-box" style="margin:0;">
+              Come in base 10 aggiungere uno 0 moltiplica per 10, in binario:<br>
+              • Aggiungere k zeri a destra (Shift Left &lt;&lt; k) <strong>moltiplica per 2ᵏ</strong>:<br>
+                110100₂ = 13 × 2² = 13 × 4 = <strong>52₁₀</strong>.<br>
+              • Togliere 1 bit a destra (Shift Right &gt;&gt; 1) <strong>divide per 2</strong> (intero):<br>
+                110₂ = 13 : 2 = <strong>6₁₀</strong> (con resto 1).
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===================================================================
+           CAPITOLO 4: CONVERSIONI APPROFONDITE BINARIO <-> DECIMALE
+           =================================================================== -->
+      <article class="detail-chapter" id="cap-4" data-keywords="conversione binario decimale divisioni successive sottrazione potenze horner virgola frazionari">
+        <div class="chapter-header">
+          <div>
+            <span class="lesson-tag">Capitolo 4 • Cuore della Lezione (Binario ↔ Decimale)</span>
+            <h2 class="chapter-title">4. Tutte le Tecniche di Conversione tra Binario e Decimale</h2>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Somma Pesata &amp; Horner</span>
+            <span class="base-badge badge-dec">Divisioni &amp; Sottrazione</span>
+          </div>
+        </div>
+
+        <div class="chapter-Grid">
+          <div>
+            <h3 style="color:var(--accent); font-size:1.02rem; margin-bottom:0.5rem;">🔄 A) Da Binario a Decimale (2 Metodi)</h3>
+            <div class="concept-list">
+              <div class="concept-item bin-border">
+                <strong>Metodo 1 — Somma Pesata delle Potenze di 2 (Consigliato):</strong><br>
+                Si scrive sopra ogni bit il peso $2^i$ partendo da destra ($1, 2, 4, 8, 16, 32, 64, 128\dots$) e si sommano solo i pesi in cui il bit è <code>1</code>.
+              </div>
+              <div class="concept-item dec-border">
+                <strong>Metodo 2 — Schema di Horner (Raddoppio da sinistra a destra):</strong><br>
+                Parti da totale $= 0$. Leggi i bit da sinistra a destra: ad ogni passo <strong>moltiplica il totale per 2 e aggiungi il bit corrente</strong>.
+                <br><em>Esempio per <code>1101₂</code>:</em>
+                <br>• Bit <code>1</code>: $0 \times 2 + 1 = 1$
+                <br>• Bit <code>1</code>: $1 \times 2 + 1 = 3$
+                <br>• Bit <code>0</code>: $3 \times 2 + 0 = 6$
+                <br>• Bit <code>1</code>: $6 \times 2 + 1 = \mathbf{13_{10}}$.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="color:var(--orange-main); font-size:1.02rem; margin-bottom:0.5rem;">🔄 B) Da Decimale a Binario (2 Metodi)</h3>
+            <div class="concept-list">
+              <div class="concept-item orange-border">
+                <strong>Metodo 1 — Divisioni Successive per 2 (Universale):</strong><br>
+                Si divide il numero per 2 annotando il resto (<code>0</code> se pari, <code>1</code> se dispari) finché il quoziente è <code>0</code>. Si leggono i resti <strong>dal basso verso l'alto (⬆️)</strong>.
+              </div>
+              <div class="concept-item hex-border">
+                <strong>Metodo 2 — Sottrazione delle Potenze di 2 (Veloce a mente!):</strong><br>
+                Trova la più grande potenza di 2 minore o uguale al numero, metti <code>1</code> in quella posizione e sottraila dal numero. Ripeti col resto!
+                <br><em>Esempio per <code>75₁₀</code>:</em>
+                <br>• La potenza $\le 75$ è <strong>64</strong> ($2^6$) $\rightarrow$ resta $75 - 64 = 11$.
+                <br>• La potenza $\le 11$ è <strong>8</strong> ($2^3$) $\rightarrow$ resta $11 - 8 = 3$.
+                <br>• $3 = \mathbf{2} (2^1) + \mathbf{1} (2^0)$.
+                <br>• Accendendo i bit $64, 8, 2, 1$: <code>1001011₂</code>!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 ESEMPI PROGRESSIVI CAPITOLO 4 (3 BIN->DEC + 3 DEC->BIN) -->
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Parte A: Binario ➔ Decimale</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base (5 bit)</span>
+            <strong>Convertire <code>10111₂</code> in Decimale</strong>
+            <div class="formula-box" style="margin:0;">
+              Pesi da destra: 16, 8, 4, 2, 1<br>
+              Bit:             1, 0, 1, 1, 1<br>
+              ---------------------------------<br>
+              10111₂ = 16 + 0 + 4 + 2 + 1 = <strong>23₁₀</strong>
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio (1 Byte = 8 bit)</span>
+            <strong>Convertire <code>11001010₂</code> in Decimale</strong>
+            <div class="formula-box" style="margin:0;">
+              Pesi: 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1<br>
+              Bit:    1 |  1 |  0 |  0 | 1 | 0 | 1 | 0<br>
+              ------------------------------------------<br>
+              Sommiamo i pesi con bit a 1:<br>
+              128 + 64 + 8 + 2 = <strong>202₁₀</strong>
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato (Con Virgola Fissa)</span>
+            <strong>Convertire <code>1101,101₂</code> in Decimale</strong>
+            <div class="formula-box" style="margin:0;">
+              • Parte intera: 1101₂ = 8 + 4 + 0 + 1 = 13<br>
+              • Dopo la virgola i pesi sono:<br>
+                2⁻¹ = 0,5 | 2⁻² = 0,25 | 2⁻³ = 0,125<br>
+                ,101₂ = (1×0,5) + (0×0,25) + (1×0,125)<br>
+                      = 0,5 + 0,125 = 0,625<br>
+              • Totale: 13 + 0,625 = <strong>13,625₁₀</strong>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Parte B: Decimale ➔ Binario</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base</span>
+            <strong>Convertire <code>19₁₀</code> in Binario</strong>
+            <div class="formula-box" style="margin:0;">
+              19 : 2 = 9  resto <strong>1</strong> (LSB)<br>
+               9 : 2 = 4  resto <strong>1</strong> ⬆️<br>
+               4 : 2 = 2  resto <strong>0</strong> ⬆️<br>
+               2 : 2 = 1  resto <strong>0</strong> ⬆️<br>
+               1 : 2 = 0  resto <strong>1</strong> (MSB)<br>
+              Lettura ⬆️: <strong>19₁₀ = 10011₂</strong> (16+2+1=19)
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio (Su 1 Byte)</span>
+            <strong>Rappresentare <code>156₁₀</code> su 8 bit (1 Byte)</strong>
+            <div class="formula-box" style="margin:0;">
+              156 : 2 = 78 r. <strong>0</strong> | 9 : 2 = 4 r. <strong>1</strong><br>
+               78 : 2 = 39 r. <strong>0</strong> | 4 : 2 = 2 r. <strong>0</strong><br>
+               39 : 2 = 19 r. <strong>1</strong> | 2 : 2 = 1 r. <strong>0</strong><br>
+               19 : 2 =  9 r. <strong>1</strong> | 1 : 2 = 0 r. <strong>1</strong> (MSB)<br>
+              Risultato: <strong>10011100₂</strong> (128+16+8+4 = 156)
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato (Decimale con Virgola)</span>
+            <strong>Convertire <code>10,375₁₀</code> in Binario</strong>
+            <div class="formula-box" style="margin:0;">
+              1) Parte intera: 10₁₀ = 8 + 2 = <strong>1010₂</strong><br>
+              2) Parte frazionaria (moltiplica per 2):<br>
+                 0,375 × 2 = <strong>0</strong>,75  ➔ cifra <strong>0</strong><br>
+                 0,75  × 2 = <strong>1</strong>,50  ➔ cifra <strong>1</strong> (resta 0,50)<br>
+                 0,50  × 2 = <strong>1</strong>,00  ➔ cifra <strong>1</strong> (resto 0, fine!)<br>
+              Risultato: <strong>1010,011₂</strong>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end;">
+          <button class="btn btn-green" onclick="scrollToChapter('gen-esercizi')">🎲 Vai al Generatore di Esercizi Binario ↔ Decimale ↑</button>
+        </div>
+      </article>
+
+      <!-- ===================================================================
+           CAPITOLO 5: IL SISTEMA OTTALE (BASE 8)
+           =================================================================== -->
+      <article class="detail-chapter" id="cap-5" data-keywords="sistema ottale base 8 terne 3 bit chmod linux conversione ottale binario decimale">
+        <div class="chapter-header">
+          <div>
+            <span class="lesson-tag">Capitolo 5 • Sistema Ottale</span>
+            <h2 class="chapter-title">5. Il Sistema Ottale (Base 8): Conversioni e Raggruppamento a 3 Bit</h2>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-oct">Base b = 8</span>
+            <span class="base-badge badge-oct">Cifre: {0,1,2,3,4,5,6,7}</span>
+            <span class="base-badge badge-bin">8 = 2³ (3 bit)</span>
+          </div>
+        </div>
+
+        <div class="chapter-Grid">
+          <div>
+            <h3 style="color:var(--oct-amber); font-size:1.02rem; margin-bottom:0.5rem;">📚 Tutte le Regole del Sistema Ottale</h3>
+            <div class="concept-list">
+              <div class="concept-item oct-border">
+                <strong>1. Da Ottale a Decimale (Somma pesata con potenze di 8):</strong><br>
+                Si moltiplica ogni cifra per $8^i$ ($8^0=1$, $8^1=8$, $8^2=64$, $8^3=512$, $8^4=4096$).
+              </div>
+              <div class="concept-item dec-border">
+                <strong>2. Da Decimale a Ottale (Divisioni successive per 8):</strong><br>
+                Si divide il numero decimale per <code>8</code> annotando i resti (che saranno sempre compresi tra <code>0</code> e <code>7</code>) e si leggono dal basso verso l'alto (⬆️).
+              </div>
+              <div class="concept-item bin-border">
+                <strong>3. Conversione Istantanea Ottale ↔ Binario (Terne di 3 bit):</strong><br>
+                Poiché $8 = 2^3$, ogni cifra ottale equivale esattamente a un blocco di <strong>3 bit</strong> (pesi <code>4 - 2 - 1</code>). Questo permette di convertire tra Base 2 e Base 8 a colpo d'occhio senza fare divisioni!
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>🟠 Tabella di Corrispondenza Ottale ↔ 3 Bit</h3>
+              <div class="pos-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">0₈</span><span class="pos-val">000₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">1₈</span><span class="pos-val">001₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">2₈</span><span class="pos-val">010₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">3₈</span><span class="pos-val">011₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">4₈</span><span class="pos-val">100₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">5₈</span><span class="pos-val">101₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">6₈</span><span class="pos-val">110₂</span></div>
+                <div class="pos-cell"><span class="pos-pow" style="color:var(--oct-amber);">7₈</span><span class="pos-val">111₂</span></div>
+              </div>
+              <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.5rem;">
+                💡 <strong>Trucco 4-2-1:</strong> Nei 3 bit il primo vale <code>4</code>, il secondo <code>2</code> e il terzo <code>1</code>. Ad esempio $6 = 4 + 2 \rightarrow$ <code>110₂</code>; $5 = 4 + 1 \rightarrow$ <code>101₂</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESEMPI PROGRESSIVI CAPITOLO 5 -->
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Cap. 5 (Sistema Ottale)</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base</span>
+            <strong>Conversione Rapida Ottale ↔ Binario (<code>625₈</code>)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Converti <code>625₈</code> in binario senza passare per il decimale:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              Sostituiamo ogni cifra ottale con i suoi 3 bit (4-2-1):<br>
+              • 6₈ = 4 + 2     = <strong>110₂</strong><br>
+              • 2₈ = 2         = <strong>010₂</strong><br>
+              • 5₈ = 4 + 1     = <strong>101₂</strong><br>
+              Risultato: <strong>625₈ = 110010101₂</strong>
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio</span>
+            <strong>Conversione Ottale ➔ Decimale e Decimale ➔ Ottale</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Converti <code>372₈</code> in Decimale e poi verifica tornando in Ottale:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              • 372₈ → Decimale (pesi 8²=64, 8¹=8, 8⁰=1):<br>
+                (3 × 64) + (7 × 8) + (2 × 1) = 192 + 56 + 2 = <strong>250₁₀</strong><br>
+              • Verifica 250₁₀ → Ottale (: 8):<br>
+                250 : 8 = 31 resto <strong>2</strong><br>
+                 31 : 8 =  3 resto <strong>7</strong><br>
+                  3 : 8 =  0 resto <strong>3</strong> ➔ <strong>372₈</strong> ✅
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato</span>
+            <strong>Caso Reale: Permessi Linux <code>chmod 754</code></strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              In Linux i permessi sono <code>r</code> (Read=4), <code>w</code> (Write=2), <code>x</code> (Execute=1) per Proprietario, Gruppo e Altri. Decodifica <code>754₈</code>:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              • Proprietario = <strong>7₈</strong> = <code>111₂</code> (4+2+1) ➔ <strong>rwx</strong> (tutto)<br>
+              • Gruppo       = <strong>5₈</strong> = <code>101₂</code> (4+0+1) ➔ <strong>r-x</strong> (lettura+esec.)<br>
+              • Altri utenti = <strong>4₈</strong> = <code>100₂</code> (4+0+0) ➔ <strong>r--</strong> (sola lettura)<br>
+              Stringa permessi: <strong>rwxr-xr--</strong> (in binario <code>111101100₂</code>)
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===================================================================
+           CAPITOLO 6: IL SISTEMA ESADECIMALE / SESSADECIMALE (BASE 16)
+           =================================================================== -->
+      <article class="detail-chapter" id="cap-6" data-keywords="sistema esadecimale sessadecimale base 16 hex nibble 4 bit colori rgb indirizzi memoria">
+        <div class="chapter-header">
+          <div>
+            <span class="lesson-tag">Capitolo 6 • Sistema Esadecimale (Sessadecimale)</span>
+            <h2 class="chapter-title">6. Il Sistema Esadecimale / Sessadecimale (Base 16): Lettere A–F e Nibble</h2>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-hex">Base b = 16</span>
+            <span class="base-badge badge-hex">0..9 + A,B,C,D,E,F</span>
+            <span class="base-badge badge-bin">16 = 2⁴ (4 bit = 1 Nibble)</span>
+          </div>
+        </div>
+
+        <div class="chapter-Grid">
+          <div>
+            <h3 style="color:var(--hex-purple); font-size:1.02rem; margin-bottom:0.5rem;">📚 Come funziona la Base 16?</h3>
+            <p style="font-size:0.9rem; margin-bottom:0.65rem;">
+              Nel sistema <strong>esadecimale</strong> (spesso chiamato anche <em>sessadecimale</em> o abbreviato in <strong>HEX</strong>) servono 16 singoli simboli per rappresentare i valori da 0 a 15. Poiché le cifre arabe finiscono a <code>9</code>, si usano le prime 6 lettere maiuscole dell'alfabeto:
+              <br><strong><code>A = 10</code>, <code>B = 11</code>, <code>C = 12</code>, <code>D = 13</code>, <code>E = 14</code>, <code>F = 15</code></strong>.
+            </p>
+            <div class="concept-list">
+              <div class="concept-item hex-border">
+                <strong>1. Da Esadecimale a Decimale (Pesi $16^i$):</strong><br>
+                I pesi delle posizioni da destra verso sinistra sono:
+                <br>• Posizione 0: $16^0 = \mathbf{1}$
+                <br>• Posizione 1: $16^1 = \mathbf{16}$
+                <br>• Posizione 2: $16^2 = \mathbf{256}$
+                <br>• Posizione 3: $16^3 = \mathbf{4.096}$
+              </div>
+              <div class="concept-item dec-border">
+                <strong>2. Da Decimale a Esadecimale (Divisioni per 16):</strong><br>
+                Si divide il numero per <code>16</code>. Se un resto è compreso tra <code>10</code> e <code>15</code>, va sostituito obbligatoriamente con la lettera corrispondente (<code>A..F</code>)!
+              </div>
+              <div class="concept-item bin-border">
+                <strong>3. Da Esadecimale a Binario (Gruppi da 4 bit / Nibble):</strong><br>
+                Ogni cifra esadecimale si traduce in esattamente <strong>4 bit</strong> (pesi <code>8 - 4 - 2 - 1</code>). Un intero Byte (8 bit) è sempre formato da <strong>2 cifre esadecimali</strong>!
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>🟣 Metodo Ponte: Esadecimale ↔ Binario ↔ Ottale</h3>
+              <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:0.5rem;">
+                Come convertire velocemente da <strong>Esadecimale a Ottale</strong> (o viceversa) senza fare lunghi calcoli in decimale? <strong>Passa sempre per il Binario!</strong>
+              </p>
+              <div class="formula-box">
+                Convertire <strong>3D₁₆</strong> in Ottale (Base 8):<br><br>
+                Passo 1 (Hex ➔ Binario a 4 bit):<br>
+                3₁₆ = 0011₂  |  D₁₆ (13) = 1101₂<br>
+                Numero binario = <strong>00111101₂</strong><br><br>
+                Passo 2 (Raggruppa in terne da 3 bit da destra):<br>
+                00 | <strong>111</strong> | <strong>101</strong>₂<br>
+                 0 |  <strong>7</strong>  |  <strong>5</strong> ₈  ➔ Risultato: <strong>3D₁₆ = 75₈</strong>!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESEMPI PROGRESSIVI CAPITOLO 6 -->
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Cap. 6 (Sistema Esadecimale)</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base</span>
+            <strong>Conversione Rapida Esadecimale ↔ Binario (<code>A7₁₆</code>)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Converti il byte esadecimale <code>A7₁₆</code> in Binario (8 bit):
+            </p>
+            <div class="formula-box" style="margin:0;">
+              • A₁₆ = 10₁₀ = 8 + 2     = <strong>1010₂</strong><br>
+              • 7₁₆ =  7₁₀ = 4 + 2 + 1 = <strong>0111₂</strong><br>
+              Unendo i due Nibble:<br>
+              <strong>A7₁₆ = 10100111₂</strong>
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio</span>
+            <strong>Conversione Decimale ➔ Esadecimale (<code>428₁₀</code>)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Converti <code>428₁₀</code> in Base 16 tramite divisioni successive per 16:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              • 428 : 16 = 26  con resto <strong>12 ➔ C</strong> (LSB)<br>
+              •  26 : 16 =  1  con resto <strong>10 ➔ A</strong> ⬆️<br>
+              •   1 : 16 =  0  con resto <strong> 1 ➔ 1</strong> (MSB)<br>
+              Leggendo dal basso verso l'alto: <strong>428₁₀ = 1AC₁₆</strong><br>
+              Verifica: (1×256) + (10×16) + (12×1) = 256+160+12 = 428 ✅
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato</span>
+            <strong>Scomposizione di un numero a 3 cifre Hex (<code>2B0F₁₆</code>)</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Calcola il valore decimale e binario dell'indirizzo di memoria <code>0x2B0F</code>:
+            </p>
+            <div class="formula-box" style="margin:0;">
+              • In Binario (4 bit per cifra):<br>
+                2=0010 | B=1011 | 0=0000 | F=1111 ➔ <code>0010101100001111₂</code><br>
+              • In Decimale (pesi 16³=4096, 16²=256, 16¹=16, 16⁰=1):<br>
+                = (2 × 4096) + (11 × 256) + (0 × 16) + (15 × 1)<br>
+                = 8192 + 2816 + 0 + 15 = <strong>11.023₁₀</strong>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===================================================================
+           CAPITOLO 7: ARITMETICA BINARIA & COMPLEMENTO A 2
+           =================================================================== -->
+      <article class="detail-chapter" id="cap-7" data-keywords="aritmetica binaria somma sottrazione moltiplicazione overflow complemento a due numeri negativi">
+        <div class="chapter-header">
+          <div>
+            <span class="lesson-tag">Capitolo 7 • Calcolo Binario &amp; Numeri con Segno</span>
+            <h2 class="chapter-title">7. Aritmetica Binaria, Overflow e Numeri Negativi (Complemento a 2)</h2>
+          </div>
+          <div class="badge-group">
+            <span class="base-badge badge-bin">Addizione &amp; Sottrazione</span>
+            <span class="base-badge badge-hex">Complemento a 2 (CA2)</span>
+          </div>
+        </div>
+
+        <div class="chapter-Grid">
+          <div>
+            <h3 style="color:var(--accent); font-size:1.02rem; margin-bottom:0.5rem;">➕ Somma e Sottrazione Binaria</h3>
+            <div class="concept-list">
+              <div class="concept-item bin-border">
+                <strong>Tabella della Somma Binaria:</strong><br>
+                • <code>0 + 0 = 0</code><br>
+                • <code>0 + 1 = 1</code> e <code>1 + 0 = 1</code><br>
+                • <code>1 + 1 = 0</code> con <strong>riporto (carry) di <code>1</code></strong> alla colonna a sinistra<br>
+                • <code>1 + 1 + 1 = 1</code> con <strong>riporto di <code>1</code></strong> alla colonna a sinistra.
+              </div>
+              <div class="concept-item orange-border">
+                <strong>Tabella della Sottrazione Binaria:</strong><br>
+                • <code>0 - 0 = 0</code>, <code>1 - 0 = 1</code>, <code>1 - 1 = 0</code><br>
+                • <code>0 - 1 = 1</code> con <strong>prestito (borrow) di <code>1</code></strong> dalla colonna a sinistra (perché chiedendo in prestito una potenza di 2 otteniamo $2 - 1 = 1$).
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="concept-card">
+              <h3>➖ Come i Computer rappresentano i Numeri Negativi: Complemento a 2</h3>
+              <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:0.5rem;">
+                Nei moderni processori i numeri interi con segno sono rappresentati in <strong>Complemento a 2 (CA2)</strong> perché consente di fare anche le sottrazioni usando lo stesso circuito della somma ($A - B = A + (-B)$)!
+              </p>
+              <div class="concept-item hex-border">
+                <strong>Regola pratica per fare il Complemento a 2 su $n$ bit:</strong><br>
+                1. Scrivi il numero positivo in binario su $n$ bit.<br>
+                2. <strong>Inverti tutti i bit</strong> (gli <code>0</code> diventano <code>1</code> e gli <code>1</code> diventano <code>0</code> — questo è il <em>Complemento a 1</em>).<br>
+                3. <strong>Somma <code>+ 1</code></strong> al risultato.<br>
+                <em>(Scorciatoia rapida: partendo da destra, copia tutti i bit fino al primo <code>1</code> incluso, poi inverti tutti gli altri a sinistra!).</em>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESEMPI PROGRESSIVI CAPITOLO 7 -->
+        <h3 style="margin-top:1.25rem; font-size:1rem; color:var(--text-main);">🎯 Esempi con Difficoltà Progressiva — Cap. 7 (Aritmetica &amp; CA2)</h3>
+        <div class="examples-progressive-grid">
+          <div class="example-level-card lvl-1">
+            <span class="lvl-pill easy">🟢 Livello 1 • Base</span>
+            <strong>Somma Binaria con Riporti (<code>10110₂ + 01101₂</code>)</strong>
+            <div class="formula-box" style="margin:0;">
+              Riporti:  ¹ ¹ 0 0 0<br>
+                        1 0 1 1 0₂ +   (22₁₀)<br>
+                        0 1 1 0 1₂ =   (13₁₀)<br>
+                      --------------<br>
+                      <strong>1 0 0 0 1 1₂</strong>     (32 + 2 + 1 = 35₁₀ ✅)
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-2">
+            <span class="lvl-pill med">🟡 Livello 2 • Intermedio</span>
+            <strong>Rappresentare <code>-18₁₀</code> in Complemento a 2 su 8 bit</strong>
+            <div class="formula-box" style="margin:0;">
+              1) +18₁₀ su 8 bit:      <code>00010010₂</code><br>
+              2) Inverti i bit (CA1): <code>11101101₂</code><br>
+              3) Somma +1 (CA2):      <code>11101110₂</code><br>
+              Verifica con peso MSB negativo (-128):<br>
+              -128 + 64 + 32 + 8 + 4 + 2 = <strong>-18₁₀</strong> ✅
+            </div>
+          </div>
+
+          <div class="example-level-card lvl-3">
+            <span class="lvl-pill hard">🔴 Livello 3 • Avanzato</span>
+            <strong>Sottrazione tramite Somma in Complemento a 2 ($25 - 18$ su 8 bit)</strong>
+            <div class="formula-box" style="margin:0;">
+              Calcoliamo 25 + (-18) su 8 bit:<br>
+              +25₁₀ = <code>00011001₂</code> +<br>
+              -18₁₀ = <code>11101110₂</code> =<br>
+              ------------------------<br>
+             (1)<code>00000111₂</code> (il 9° bit di carry si scarta in CA2)<br>
+              Risultato su 8 bit: <code>00000111₂</code> = <strong>+7₁₀</strong> ✅
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- FOOTER NAVIGATION PER SLIDE -->
+  <footer class="bottom-footer" id="slideFooter">
+    <button class="btn" id="prevBtn" onclick="changeSlide(-1)">◀ Prec</button>
+    <div style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap; justify-content:center;">
+      <span id="slideCounterText" style="font-size:0.86rem; font-weight:700; color:var(--text-muted);">Slide 1 / 12</span>
+      <button class="btn btn-green" onclick="openExerciseGenerator()" style="padding:0.3rem 0.65rem; min-height:32px; font-size:0.78rem;">
+        🎲 Generatore Esercizi
+      </button>
+    </div>
+    <button class="btn btn-primary" id="nextBtn" onclick="changeSlide(1)">Succ ▶</button>
+  </footer>
+
+  <!-- MODAL INDICE RAPIDO -->
+  <div class="modal-overlay" id="indexModal" onclick="if(event.target===this) closeIndexModal()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-size:1.1rem; color:var(--accent);">📑 Indice Rapido della Lezione</h3>
+        <button class="btn" onclick="closeIndexModal()">✖ Chiudi</button>
+      </div>
+      <div class="modal-body">
+        <h4 style="color:var(--orange-main); margin-bottom:0.6rem;">🎞️ Parte 1: Slide con Concetti Essenziali (12 Slide)</h4>
+        <div id="modalSlideList" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:0.5rem; margin-bottom:1.25rem;"></div>
+
+        <h4 style="color:var(--bin-green); margin-bottom:0.6rem;">🎲 Laboratorio &amp; Parte 2: Spiegazione Dettagliata con Difficoltà Progressiva</h4>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:0.5rem;">
+          <button class="btn btn-green" style="justify-content:flex-start;" onclick="closeIndexModal(); openExerciseGenerator();">🎲 Generatore Esercizi Binario ↔ Decimale</button>
+          <button class="btn" style="justify-content:flex-start;" onclick="closeIndexModal(); openChapterInGuide('cap-1');">Cap. 1 — Fondamenti &amp; Base b</button>
+          <button class="btn" style="justify-content:flex-start;" onclick="closeIndexModal(); openChapterInGuide('cap-2');">Cap. 2 — Sistema Decimale (Base 10)</button>
+          <button class="btn" style="justify-content:flex-start;" onclick="closeIndexModal(); openChapterInGuide('cap-3');">Cap. 3 — Sistema Binario (Base 2)</button>
+          <button class="btn" style="justify-content:flex-start;" onclick="closeIndexModal(); openChapterInGuide('cap-4');">Cap. 4 — Conversioni Binario ↔ Decimale</button>
+          <button class="btn" style="justify-content:flex-start;" onclick="closeIndexModal(); openChapterInGuide('cap-5');">Cap. 5 — Sistema Ottale (Base 8)</button>
+          <button class="btn" style="justify-content:flex-start;" onclick="closeIndexModal(); openChapterInGuide('cap-6');">Cap. 6 — Sistema Esadecimale (Base 16)</button>
+          <button class="btn" style="justify-content:flex-start;" onclick="closeIndexModal(); openChapterInGuide('cap-7');">Cap. 7 — Aritmetica &amp; Complemento a 2</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.app-shell -->
+
+<script>
+  let currentSlide = 0;
+  let currentMode = 'slides';
+  const slides = document.querySelectorAll('.slide');
+  const quickJumpBar = document.getElementById('quickJumpBar');
+  const progressBar = document.getElementById('progressBar');
+  const slideCounterText = document.getElementById('slideCounterText');
+
+  // =========================================================================
+  // 1. SIMULATORE INTERATTIVO DI 1 BYTE (8 BIT) NELLA SLIDE 4
+  // =========================================================================
+  const byteState = [0, 0, 0, 1, 0, 1, 0, 1]; // Default: 00010101 = 21
+
+  function renderSlideBitStrip() {
+    const container = document.getElementById('slideBitStrip');
+    if (!container) return;
+    container.innerHTML = '';
+    let sum = 0;
+    const activeParts = [];
+
+    for (let i = 0; i < 8; i++) {
+      const bitPos = 7 - i;
+      const weight = 1 << bitPos;
+      const val = byteState[i];
+      if (val === 1) {
+        sum += weight;
+        activeParts.push(weight);
+      }
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'bit-toggle-btn' + (val === 1 ? ' on' : '');
+      btn.innerHTML = `
+        <span class="b-weight">2<sup>${bitPos}</sup>=${weight}</span>
+        <span class="b-digit">${val}</span>
+      `;
+      btn.onclick = () => {
+        byteState[i] = byteState[i] === 1 ? 0 : 1;
+        renderSlideBitStrip();
+      };
+      container.appendChild(btn);
+    }
+
+    const binStr = byteState.join('');
+    const hexStr = sum.toString(16).toUpperCase().padStart(2, '0');
+    const octStr = sum.toString(8);
+    const sumBreakdown = activeParts.length > 0 ? activeParts.join(' + ') : '0';
+
+    const formulaEl = document.getElementById('slideBitFormula');
+    if (formulaEl) {
+      formulaEl.innerHTML = `
+        <strong>${binStr}₂</strong> = ${sumBreakdown} = <strong style="color:var(--accent); font-size:1.1rem;">${sum}₁₀</strong>
+        <span style="color:var(--text-muted); font-size:0.82rem; margin-left:0.5rem;">(Ottale: ${octStr}₈ • Hex: ${hexStr}₁₆)</span>
+      `;
+    }
+  }
+
+  // =========================================================================
+  // 2. GENERATORE DI ESERCIZI BINARIO <-> DECIMALE CON SOLUZIONE PASSO-PASSO
+  // =========================================================================
+  let currentExercise = {
+    numberDec: 42,
+    numberBin: '101010',
+    direction: 'dec2bin', // 'dec2bin' | 'bin2dec'
+    solvedCount: 0,
+    attemptCount: 0,
+    alreadyScoredThisOne: false
+  };
+
+  function generateNewExercise() {
+    const dirSelect = document.getElementById('genDirection').value;
+    const diffSelect = document.getElementById('genDifficulty').value;
+
+    let actualDir = dirSelect;
+    if (dirSelect === 'mixed') {
+      actualDir = Math.random() < 0.5 ? 'dec2bin' : 'bin2dec';
+    }
+
+    let min = 3, max = 31;
+    if (diffSelect === 'med') {
+      min = 32; max = 255;
+    } else if (diffSelect === 'hard') {
+      min = 256; max = 1023;
+    }
+
+    // Evita di estrarre due volte di fila lo stesso numero
+    let num = Math.floor(Math.random() * (max - min + 1)) + min;
+    if (num === currentExercise.numberDec && max > min) {
+      num = ((num - min + 1) % (max - min + 1)) + min;
+    }
+
+    setExerciseProblem(num, actualDir);
+  }
+
+  function setExerciseProblem(numDec, direction) {
+    currentExercise.numberDec = numDec;
+    currentExercise.numberBin = numDec.toString(2);
+    currentExercise.direction = direction;
+    currentExercise.alreadyScoredThisOne = false;
+
+    const promptLabel = document.getElementById('problemPromptLabel');
+    const numDisplay = document.getElementById('problemNumberDisplay');
+    const hintSub = document.getElementById('problemHintSub');
+    const answerLabel = document.getElementById('userAnswerLabel');
+    const answerInput = document.getElementById('userAnswerInput');
+    const feedback = document.getElementById('exerciseFeedback');
+    const solutionPanel = document.getElementById('solutionPanel');
+
+    feedback.className = 'feedback-banner';
+    feedback.innerHTML = '';
+    answerInput.value = '';
+
+    if (direction === 'dec2bin') {
+      promptLabel.textContent = 'Converti da DECIMALE (Base 10) a BINARIO (Base 2):';
+      numDisplay.innerHTML = `${numDec}<sub style="font-size:0.55em; color:var(--text-muted);">10</sub>`;
+      hintSub.textContent = 'Dividi ripetutamente per 2 fino a quoziente 0 e leggi i resti dal basso verso l\'alto (⬆️).';
+      answerLabel.textContent = '✍️ Inserisci il risultato in BINARIO (cifre 0 e 1):';
+      answerInput.placeholder = 'Es. 101101';
+    } else {
+      promptLabel.textContent = 'Converti da BINARIO (Base 2) a DECIMALE (Base 10):';
+      numDisplay.innerHTML = `${currentExercise.numberBin}<sub style="font-size:0.55em; color:var(--text-muted);">2</sub>`;
+      hintSub.textContent = `Questo numero ha ${currentExercise.numberBin.length} bit: somma i pesi 2ⁱ (1, 2, 4, 8, 16...) corrispondenti ai bit a 1.`;
+      answerLabel.textContent = '✍️ Inserisci il risultato in DECIMALE (Base 10):';
+      answerInput.placeholder = 'Es. 45';
+    }
+
+    solutionPanel.innerHTML = `
+      <h3 style="font-size:1rem; color:var(--accent); margin-bottom:0.5rem;">
+        📐 Svolgimento Passo-Passo Pronto
+      </h3>
+      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.8rem;">
+        Prova a calcolare la conversione di <strong>${direction === 'dec2bin' ? numDec + '₁₀' : currentExercise.numberBin + '₂'}</strong> e verifica la tua risposta, oppure clicca qui sotto per vedere subito applicato il procedimento completo passo-passo:
+      </p>
+      <button class="btn btn-orange" onclick="showExerciseSolution()">
+        💡 Mostra Soluzione che Applica la Conversione
+      </button>
+    `;
+  }
+
+  function checkUserAnswer() {
+    const raw = document.getElementById('userAnswerInput').value.trim().replace(/\s+/g, '');
+    const feedback = document.getElementById('exerciseFeedback');
+    if (!raw) {
+      feedback.className = 'feedback-banner wrong';
+      feedback.innerHTML = '⚠️ Inserisci prima una risposta nel campo di testo (oppure premi "💡 Mostra Soluzione").';
+      return;
+    }
+
+    let isCorrect = false;
+    if (currentExercise.direction === 'dec2bin') {
+      if (!/^[01]+$/.test(raw)) {
+        feedback.className = 'feedback-banner wrong';
+        feedback.innerHTML = '⚠️ Un numero binario può contenere solo le cifre <code>0</code> e <code>1</code>!';
+        return;
+      }
+      const normalizedUser = raw.replace(/^0+(?=\d)/, '');
+      isCorrect = (normalizedUser === currentExercise.numberBin);
+    } else {
+      if (!/^\d+$/.test(raw)) {
+        feedback.className = 'feedback-banner wrong';
+        feedback.innerHTML = '⚠️ Inserisci un numero intero decimale valido (cifre da 0 a 9).';
+        return;
+      }
+      isCorrect = (parseInt(raw, 10) === currentExercise.numberDec);
+    }
+
+    if (!currentExercise.alreadyScoredThisOne) {
+      currentExercise.attemptCount++;
+      if (isCorrect) {
+        currentExercise.solvedCount++;
+      }
+      currentExercise.alreadyScoredThisOne = true;
+      document.getElementById('scoreBadge').textContent = `✔️ Corretti: ${currentExercise.solvedCount} / ${currentExercise.attemptCount}`;
+    }
+
+    if (isCorrect) {
+      feedback.className = 'feedback-banner correct';
+      feedback.innerHTML = `🎉 <strong>Esatto!</strong> Ottimo lavoro: <code>${currentExercise.numberDec}₁₀ = ${currentExercise.numberBin}₂</code>. Ecco a destra tutti i passaggi della conversione!`;
+      showExerciseSolution();
+    } else {
+      feedback.className = 'feedback-banner wrong';
+      feedback.innerHTML = `❌ <strong>Non è corretto.</strong> Riprova controllando i calcoli oppure premi <strong>"💡 Mostra Soluzione"</strong> per vedere lo svolgimento passo-passo.`;
+    }
+  }
+
+  // COSTRUISCE E VISUALIZZA LA SOLUZIONE CHE APPLICA LA CONVERSIONE PASSO-PASSO
+  function showExerciseSolution() {
+    const panel = document.getElementById('solutionPanel');
+    const nDec = currentExercise.numberDec;
+    const nBin = currentExercise.numberBin;
+
+    if (currentExercise.direction === 'dec2bin') {
+      // Costruisci tabella delle divisioni successive per 2
+      let temp = nDec;
+      let rowsHtml = '';
+      let stepNum = 1;
+      const remainders = [];
+
+      if (temp === 0) {
+        rowsHtml = `<tr><td>1</td><td>0 : 2</td><td>0</td><td><span class="rem-badge">0</span></td><td>Unico bit</td></tr>`;
+        remainders.push(0);
+      } else {
+        while (temp > 0) {
+          const q = Math.floor(temp / 2);
+          const r = temp % 2;
+          remainders.push(r);
+          let posNote = '⬆️';
+          if (stepNum === 1) posNote = '1° resto ➔ <strong>LSB (a destra)</strong>';
+          if (q === 0) posNote = 'Ultimo resto ➔ <strong>MSB (a sinistra)</strong>';
+
+          rowsHtml += `
+            <tr>
+              <td>#${stepNum}</td>
+              <td><strong>${temp}</strong> : 2</td>
+              <td>${q}</td>
+              <td><span class="rem-badge">${r}</span></td>
+              <td style="font-family:var(--font-sans); font-size:0.78rem;">${posNote}</td>
+            </tr>
+          `;
+          temp = q;
+          stepNum++;
+        }
+      }
+
+      // Costruisci anche la verifica con le potenze di 2
+      const activePowers = [];
+      for (let i = 0; i < nBin.length; i++) {
+        const bit = nBin[i];
+        const exp = nBin.length - 1 - i;
+        if (bit === '1') {
+          activePowers.push(`2<sup>${exp}</sup> (${1 << exp})`);
+        }
+      }
+
+      panel.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.6rem;">
+          <h3 style="font-size:1.02rem; color:var(--bin-green);">
+            ✅ Soluzione Svolta: ${nDec}₁₀ ➔ ${nBin}₂
+          </h3>
+          <span class="base-badge badge-bin">Metodo Divisioni Successive (: 2)</span>
+        </div>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:0.5rem;">
+          Applichiamo la divisione intera ripetuta per <code>2</code> finché il quoziente diventa <code>0</code>:
+        </p>
+        <div class="step-table-wrap">
+          <table class="step-table">
+            <thead>
+              <tr>
+                <th>Passo</th>
+                <th>Divisione</th>
+                <th>Quoziente</th>
+                <th>Resto (Bit)</th>
+                <th>Ordine Lettura ⬆️</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+        </div>
+        <div class="formula-box" style="margin-top:0.65rem;">
+          📖 <strong>Lettura resti dal basso verso l'alto (⬆️):</strong><br>
+          <span style="font-size:1.15rem; color:var(--bin-green); font-weight:900;">${nDec}₁₀ = ${nBin}₂</span><br>
+          <span style="font-size:0.8rem; color:var(--text-muted);">🔎 Riprova per somma di potenze di 2: ${activePowers.join(' + ')} = ${nDec}₁₀ ✅</span>
+        </div>
+      `;
+    } else {
+      // Conversione da Binario a Decimale con tabella posizionale bit per bit
+      const len = nBin.length;
+      let posCellsHtml = '';
+      const sumTerms = [];
+      const prodTerms = [];
+
+      for (let i = 0; i < len; i++) {
+        const bit = parseInt(nBin[i], 10);
+        const exp = len - 1 - i;
+        const weight = 1 << exp;
+        const contrib = bit * weight;
+        prodTerms.push(`(${bit}×2<sup>${exp}</sup>)`);
+        if (bit === 1) {
+          sumTerms.push(weight);
+        }
+        posCellsHtml += `
+          <div class="pos-cell ${bit === 1 ? 'active-bit' : ''}">
+            <span class="pos-idx">Pos. ${exp}</span>
+            <span class="pos-pow">2<sup>${exp}</sup> = ${weight}</span>
+            <span class="pos-val">${bit}</span>
+            <span style="font-size:0.74rem; font-family:var(--font-mono); color:${bit === 1 ? 'var(--bin-green)' : 'var(--text-muted)'};">
+              +${contrib}
+            </span>
+          </div>
+        `;
+      }
+
+      panel.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.6rem;">
+          <h3 style="font-size:1.02rem; color:var(--accent);">
+            ✅ Soluzione Svolta: ${nBin}₂ ➔ ${nDec}₁₀
+          </h3>
+          <span class="base-badge badge-dec">Metodo Pesi Posizionali (2ⁱ)</span>
+        </div>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:0.5rem;">
+          Assegniamo a ciascun bit la posizione da destra a sinistra (da <code>0</code> a <code>${len - 1}</code>) e sommiamo i pesi $2^i$ dove il bit vale <strong>1</strong>:
+        </p>
+        <div class="pos-grid">
+          ${posCellsHtml}
+        </div>
+        <div class="formula-box">
+          <strong>1) Sviluppo Polinomiale:</strong><br>
+          ${nBin}₂ = ${prodTerms.join(' + ')}<br><br>
+          <strong>2) Somma dei soli pesi con bit a 1:</strong><br>
+          ${sumTerms.length > 0 ? sumTerms.join(' + ') : '0'} = <span style="font-size:1.15rem; color:var(--accent); font-weight:900;">${nDec}₁₀</span> ✅
+        </div>
+      `;
+    }
+  }
+
+  // RISOLUTORE LIBERO PER QUALSIASI NUMERO INSERITO DALL'UTENTE
+  function solveCustomNumber(mode) {
+    const raw = document.getElementById('customNumberInput').value.trim().replace(/\s+/g, '');
+    const feedback = document.getElementById('exerciseFeedback');
+    if (!raw) {
+      feedback.className = 'feedback-banner wrong';
+      feedback.innerHTML = '⚠️ Scrivi prima un numero nel riquadro in basso per vederne la conversione passo-passo.';
+      return;
+    }
+
+    if (mode === 'dec2bin') {
+      const cleaned = raw.replace(/d$/i, '');
+      if (!/^\d+$/.test(cleaned)) {
+        feedback.className = 'feedback-banner wrong';
+        feedback.innerHTML = '⚠️ Per convertire da Decimale a Binario inserisci un numero intero positivo (es. <code>156</code>).';
+        return;
+      }
+      const val = parseInt(cleaned, 10);
+      if (val > 65535) {
+        feedback.className = 'feedback-banner wrong';
+        feedback.innerHTML = '⚠️ Inserisci un numero decimale minore o uguale a 65535 (16 bit).';
+        return;
+      }
+      setExerciseProblem(val, 'dec2bin');
+      showExerciseSolution();
+    } else {
+      const cleaned = raw.replace(/b$/i, '');
+      if (!/^[01]+$/.test(cleaned)) {
+        feedback.className = 'feedback-banner wrong';
+        feedback.innerHTML = '⚠️ Per convertire da Binario a Decimale inserisci solo cifre <code>0</code> e <code>1</code> (es. <code>101101</code>).';
+        return;
+      }
+      if (cleaned.length > 16) {
+        feedback.className = 'feedback-banner wrong';
+        feedback.innerHTML = '⚠️ Inserisci un numero binario fino a 16 bit.';
+        return;
+      }
+      const val = parseInt(cleaned, 2);
+      setExerciseProblem(val, 'bin2dec');
+      showExerciseSolution();
+    }
+  }
+
+  function openExerciseGenerator(preferredDir) {
+    if (preferredDir) {
+      document.getElementById('genDirection').value = preferredDir;
+      generateNewExercise();
+    }
+    switchMode('guide', true);
+    setTimeout(() => {
+      scrollToChapter('gen-esercizi');
+    }, 80);
+  }
+
+  // =========================================================================
+  // 3. NAVIGAZIONE SLIDE, MODALITÀ, RICERCA, TEMA E SIMULATORE 9:16
+  // =========================================================================
+  function initNavigation() {
+    quickJumpBar.innerHTML = '';
+    const modalSlideList = document.getElementById('modalSlideList');
+    modalSlideList.innerHTML = '';
+
+    slides.forEach((s, idx) => {
+      const title = s.getAttribute('data-title') || `Slide ${idx + 1}`;
+      const pill = document.createElement('button');
+      pill.className = 'module-pill' + (idx === currentSlide ? ' active' : '');
+      pill.textContent = title;
+      pill.onclick = () => {
+        if (currentMode !== 'slides') switchMode('slides');
+        goToSlide(idx);
+      };
+      quickJumpBar.appendChild(pill);
+
+      const mBtn = document.createElement('button');
+      mBtn.className = 'btn';
+      mBtn.style.justifyContent = 'flex-start';
+      mBtn.textContent = title;
+      mBtn.onclick = () => {
+        closeIndexModal();
+        switchMode('slides');
+        goToSlide(idx);
+      };
+      modalSlideList.appendChild(mBtn);
+    });
+    updateSlideUI();
+    renderSlideBitStrip();
+    generateNewExercise();
+  }
+
+  function updateSlideUI() {
+    slides.forEach((s, idx) => {
+      s.classList.toggle('active', idx === currentSlide);
+    });
+    const pills = quickJumpBar.querySelectorAll('.module-pill');
+    pills.forEach((p, idx) => {
+      p.classList.toggle('active', idx === currentSlide);
+      if (idx === currentSlide) {
+        p.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    });
+    const pct = ((currentSlide + 1) / slides.length) * 100;
+    progressBar.style.width = pct + '%';
+    slideCounterText.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+    document.getElementById('prevBtn').disabled = (currentSlide === 0);
+    document.getElementById('prevBtn').style.opacity = (currentSlide === 0) ? '0.45' : '1';
+    document.getElementById('nextBtn').textContent = (currentSlide === slides.length - 1) ? '📖 Vai alla Parte 2 ▶' : 'Succ ▶';
+  }
+
+  function goToSlide(idx) {
+    if (idx < 0 || idx >= slides.length) return;
+    currentSlide = idx;
+    updateSlideUI();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function changeSlide(delta) {
+    if (currentSlide === slides.length - 1 && delta > 0) {
+      switchMode('guide');
+      return;
+    }
+    goToSlide(currentSlide + delta);
+  }
+
+  function switchMode(mode, highlightLab = false) {
+    currentMode = mode;
+    const viewSlides = document.getElementById('viewSlides');
+    const viewGuide = document.getElementById('viewGuide');
+    const btnSlides = document.getElementById('btnModeSlides');
+    const btnGuide = document.getElementById('btnModeGuide');
+    const btnLab = document.getElementById('btnModeLab');
+    const slideFooter = document.getElementById('slideFooter');
+    const quickJump = document.getElementById('quickJumpBar');
+
+    btnSlides.classList.remove('active');
+    btnGuide.classList.remove('active');
+    btnLab.classList.remove('active');
+
+    if (mode === 'slides') {
+      viewSlides.classList.add('active');
+      viewGuide.classList.remove('active');
+      btnSlides.classList.add('active');
+      slideFooter.style.display = 'flex';
+      quickJump.style.display = 'flex';
+      updateSlideUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      viewSlides.classList.remove('active');
+      viewGuide.classList.add('active');
+      if (highlightLab) {
+        btnLab.classList.add('active');
+      } else {
+        btnGuide.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      slideFooter.style.display = 'none';
+      quickJump.style.display = 'none';
+      progressBar.style.width = '100%';
+    }
+  }
+
+  function openChapterInGuide(chapterId) {
+    switchMode('guide');
+    setTimeout(() => {
+      scrollToChapter(chapterId);
+    }, 80);
+  }
+
+  function scrollToChapter(chapterId) {
+    const el = document.getElementById(chapterId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function filterGuideChapters(query) {
+    const q = query.trim().toLowerCase();
+    const chapters = document.querySelectorAll('.detail-chapter');
+    chapters.forEach(ch => {
+      const text = (ch.innerText + ' ' + (ch.getAttribute('data-keywords') || '')).toLowerCase();
+      const match = !q || text.includes(q);
+      ch.style.display = match ? 'block' : 'none';
+    });
+  }
+
+  function openIndexModal() {
+    document.getElementById('indexModal').classList.add('active');
+  }
+
+  function closeIndexModal() {
+    document.getElementById('indexModal').classList.remove('active');
+  }
+
+  function toggleTheme() {
+    const root = document.documentElement;
+    const isLight = root.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      root.removeAttribute('data-theme');
+      document.getElementById('themeBtn').textContent = '☀️';
+    } else {
+      root.setAttribute('data-theme', 'light');
+      document.getElementById('themeBtn').textContent = '🌙';
+    }
+  }
+
+  function togglePhoneSim() {
+    document.body.classList.toggle('simulate-phone-9-16');
+    const isPhone = document.body.classList.contains('simulate-phone-9-16');
+    const btn = document.getElementById('btnPhoneSim');
+    btn.textContent = isPhone ? '🖥️ Torna a Vista PC 16:9' : '📱 Vista 9:16 (6")';
+  }
+
+  // TASTIERA (FRECCE + ESC)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeIndexModal();
+      return;
+    }
+    if (currentMode === 'slides' && !['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      if (e.key === 'ArrowRight') changeSlide(1);
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+    }
+  });
+
+  // SUPPORTO SWIPE TOUCH PER SMARTPHONE 9:16 (6 POLLICI)
+  let touchStartX = 0;
+  let touchStartY = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    if (currentMode !== 'slides') return;
+    if (e.target.closest('pre, .quick-jump-bar, table, .bit-interactive-strip')) return;
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+    if (Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+      if (dx < 0) changeSlide(1);
+      else changeSlide(-1);
+    }
+  }, { passive: true });
+
+  initNavigation();
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('phone') === '1') togglePhoneSim();
+  if (params.get('mode') === 'guide') switchMode('guide');
+  if (params.get('mode') === 'lab') openExerciseGenerator();
+  if (params.get('slide')) goToSlide(parseInt(params.get('slide'), 10) - 1);
+</script>
+</body>
+</html>
