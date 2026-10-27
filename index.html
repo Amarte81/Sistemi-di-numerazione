@@ -168,133 +168,243 @@
       text-align: center;
     }
 
+    /* ==========================================
+       KEYFRAMES & ANIMAZIONI PER PARTI INTERATTIVE
+       ========================================== */
+    @keyframes pulseGlowGreen {
+      0%, 100% { box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35), 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 6px 22px rgba(16, 185, 129, 0.6), 0 0 0 5px rgba(16, 185, 129, 0); }
+    }
+
+    @keyframes pulseGlowOrange {
+      0%, 100% { box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35), 0 0 0 0 rgba(249, 115, 22, 0.4); }
+      50% { box-shadow: 0 6px 22px rgba(249, 115, 22, 0.6), 0 0 0 5px rgba(249, 115, 22, 0); }
+    }
+
+    @keyframes pulseGlowBlue {
+      0%, 100% { box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35), 0 0 0 0 rgba(56, 189, 248, 0.35); }
+      50% { box-shadow: 0 6px 22px rgba(56, 189, 248, 0.6), 0 0 0 5px rgba(56, 189, 248, 0); }
+    }
+
+    @keyframes slideFadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.992); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes numberPop {
+      0% { transform: scale(0.86); opacity: 0.3; }
+      60% { transform: scale(1.06); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes bitFlip {
+      0% { transform: scale(0.9) rotateX(25deg); }
+      60% { transform: scale(1.08) rotateX(-5deg); }
+      100% { transform: scale(1) rotateX(0); }
+    }
+
+    @keyframes chapterFlash {
+      0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.8), 0 0 35px rgba(56, 189, 248, 0.6); border-color: var(--accent); }
+      50% { box-shadow: 0 0 0 8px rgba(56, 189, 248, 0), 0 0 45px rgba(16, 185, 129, 0.5); border-color: var(--bin-green); }
+      100% { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16); }
+    }
+
+    @keyframes liveDotPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.45); opacity: 0.55; }
+    }
+
     /* MODE SWITCHER (PARTE 1 SLIDE vs PARTE 2 SPIEGAZIONE vs LABORATORIO ESERCIZI) */
     .mode-switcher {
       display: inline-flex;
       background: var(--bg-elevated);
-      padding: 0.25rem;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      gap: 0.25rem;
+      padding: 0.3rem;
+      border-radius: 12px;
+      border: 2px solid var(--border-color);
+      gap: 0.35rem;
       flex-wrap: wrap;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
     }
 
     .mode-btn {
-      background: transparent;
-      border: none;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid transparent;
       color: var(--text-muted);
-      padding: 0.48rem 0.9rem;
-      border-radius: 8px;
-      font-size: 0.84rem;
-      font-weight: 700;
+      padding: 0.52rem 1rem;
+      border-radius: 9px;
+      font-size: 0.86rem;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      transition: var(--transition);
+      gap: 0.45rem;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       white-space: nowrap;
+      position: relative;
     }
 
     .mode-btn:hover {
       color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      transform: translateY(-2px);
     }
 
     .mode-btn.active {
-      background: linear-gradient(135deg, var(--orange-main), #ea580c);
+      background: linear-gradient(135deg, #fb923c, #ea580c);
       color: #ffffff;
-      box-shadow: 0 2px 10px rgba(249, 115, 22, 0.35);
+      border-color: #fdba74;
+      box-shadow: 0 4px 16px rgba(249, 115, 22, 0.5);
+      transform: translateY(-1px);
     }
 
     .mode-btn.part2-btn.active {
-      background: linear-gradient(135deg, var(--accent), #0284c7);
-      color: #0b1120;
-      box-shadow: 0 2px 10px var(--accent-glow);
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      color: #ffffff;
+      border-color: #bae6fd;
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .mode-btn.lab-btn {
+      border: 1px dashed rgba(16, 185, 129, 0.6);
+      color: var(--bin-green);
     }
 
     .mode-btn.lab-btn.active {
-      background: linear-gradient(135deg, var(--bin-green), #059669);
+      background: linear-gradient(135deg, #10b981, #059669);
       color: #ffffff;
-      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.35);
+      border: 1px solid #6ee7b7;
+      animation: pulseGlowGreen 2.4s infinite ease-in-out;
     }
 
     .nav-controls {
       display: flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
     }
 
+    /* PULSANTI AD ALTA VISIBILITÀ E DISTINGUIBILITÀ */
     .btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
+      background: linear-gradient(180deg, var(--bg-card-hover), var(--bg-card));
+      border: 2px solid #475569;
       color: var(--text-main);
-      padding: 0.45rem 0.8rem;
-      min-height: 38px;
-      border-radius: 8px;
-      font-size: 0.84rem;
-      font-weight: 600;
+      padding: 0.52rem 0.95rem;
+      min-height: 40px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.4rem;
-      transition: var(--transition);
+      gap: 0.45rem;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
       text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="light"] .btn {
+      background: linear-gradient(180deg, #ffffff, #e2e8f0);
+      border-color: #94a3b8;
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.1);
     }
 
     .btn:hover {
-      background: var(--bg-card-hover);
+      background: linear-gradient(135deg, #1e293b, #334155);
       border-color: var(--accent);
-      color: var(--accent);
+      color: #7dd3fc;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.35);
+    }
+
+    [data-theme="light"] .btn:hover {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #0284c7;
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
     }
 
     .btn-primary {
-      background: var(--accent);
-      color: #0b1120;
-      border-color: var(--accent);
-      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      color: #ffffff !important;
+      border: 2px solid #7dd3fc;
+      font-weight: 800;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
     }
 
     .btn-primary:hover {
-      background: #7dd3fc;
-      color: #0b1120;
-      border-color: #7dd3fc;
+      background: linear-gradient(135deg, #7dd3fc 0%, #0369a1 100%);
+      color: #ffffff !important;
+      border-color: #e0f2fe;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 22px rgba(56, 189, 248, 0.65);
     }
 
     .btn-green {
-      background: var(--bin-bg);
-      color: var(--bin-green);
-      border-color: var(--bin-green);
-      font-weight: 700;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff !important;
+      border: 2px solid #6ee7b7;
+      font-weight: 800;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
     }
 
     .btn-green:hover {
-      background: var(--bin-green);
-      color: #ffffff;
+      background: linear-gradient(135deg, #34d399 0%, #047857 100%);
+      color: #ffffff !important;
+      border-color: #a7f3d0;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.65);
     }
 
     .btn-orange {
-      background: var(--orange-bg);
-      color: var(--orange-main);
-      border-color: var(--orange-main);
-      font-weight: 700;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      color: #ffffff !important;
+      border: 2px solid #fdba74;
+      font-weight: 800;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
     }
 
     .btn-orange:hover {
-      background: var(--orange-main);
-      color: #ffffff;
+      background: linear-gradient(135deg, #fb923c 0%, #c2410c 100%);
+      color: #ffffff !important;
+      border-color: #ffedd5;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.65);
     }
 
     .btn-purple {
-      background: var(--hex-bg);
-      color: var(--hex-purple);
-      border-color: var(--hex-purple);
-      font-weight: 700;
+      background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+      color: #ffffff !important;
+      border: 2px solid #d8b4fe;
+      font-weight: 800;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
     }
 
     .btn-purple:hover {
-      background: var(--hex-purple);
-      color: #ffffff;
+      background: linear-gradient(135deg, #c084fc 0%, #6b21a8 100%);
+      color: #ffffff !important;
+      border-color: #f3e8ff;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(168, 85, 247, 0.65);
+    }
+
+    .btn-pulse-green {
+      animation: pulseGlowGreen 2.2s infinite ease-in-out;
+    }
+
+    .btn-pulse-orange {
+      animation: pulseGlowOrange 2.2s infinite ease-in-out;
     }
 
     .slide-progress-container {
@@ -341,30 +451,76 @@
     }
 
     .module-pill {
-      padding: 0.28rem 0.68rem;
+      padding: 0.34rem 0.78rem;
       border-radius: 999px;
       background: var(--bg-card);
-      border: 1px solid var(--border-color);
+      border: 1.5px solid var(--border-color);
       color: var(--text-muted);
       cursor: pointer;
       white-space: nowrap;
-      transition: var(--transition);
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
       display: inline-flex;
       align-items: center;
-      gap: 0.32rem;
-      font-weight: 600;
+      gap: 0.35rem;
+      font-weight: 700;
       flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .module-pill:hover {
       border-color: var(--accent);
       color: var(--text-main);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.28);
     }
 
     .module-pill.active {
-      background: var(--accent-glow);
-      border-color: var(--accent);
-      color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+      border-color: #7dd3fc;
+      color: #ffffff;
+      box-shadow: 0 3px 12px rgba(56, 189, 248, 0.45);
+    }
+
+    /* BADGE ANIMATO PER PARTI INTERATTIVE */
+    .interactive-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(56, 189, 248, 0.22));
+      color: #34d399;
+      border: 1.5px solid #10b981;
+      padding: 0.22rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.28);
+    }
+
+    [data-theme="light"] .interactive-live-badge {
+      color: #047857;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      display: inline-block;
+      animation: liveDotPulse 1.4s infinite ease-in-out;
+    }
+
+    .interactive-zone-card {
+      border: 2px solid var(--bin-green) !important;
+      background: linear-gradient(145deg, var(--bg-card), rgba(16, 185, 129, 0.08)) !important;
+      box-shadow: 0 8px 26px rgba(16, 185, 129, 0.18);
+      position: relative;
+    }
+
+    .chapter-highlight-flash {
+      animation: chapterFlash 1.8s ease-out;
     }
 
     /* MAIN CONTAINER */
@@ -405,6 +561,7 @@
 
     .slide.active {
       display: block;
+      animation: slideFadeIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .slide-split-16-9 > *,
@@ -610,32 +767,57 @@
     .bit-interactive-strip {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
-      gap: 0.35rem;
-      margin: 0.75rem 0;
+      gap: 0.45rem;
+      margin: 0.85rem 0;
     }
 
     .bit-toggle-btn {
-      background: var(--bg-elevated);
-      border: 2px solid var(--border-color);
-      border-radius: 8px;
-      padding: 0.45rem 0.15rem;
+      background: linear-gradient(180deg, #1e293b, #0f172a);
+      border: 2px solid #475569;
+      border-radius: 10px;
+      padding: 0.5rem 0.2rem;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.2rem;
-      transition: var(--transition);
+      gap: 0.25rem;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
       color: var(--text-main);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    [data-theme="light"] .bit-toggle-btn {
+      background: linear-gradient(180deg, #ffffff, #e2e8f0);
+      border-color: #94a3b8;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
     }
 
     .bit-toggle-btn:hover {
       border-color: var(--accent);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 6px 16px rgba(56, 189, 248, 0.35);
     }
 
     .bit-toggle-btn.on {
-      background: var(--bin-bg);
-      border-color: var(--bin-green);
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.28), rgba(5, 150, 105, 0.42));
+      border: 2px solid #34d399;
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      animation: bitFlip 0.26s ease-out;
+    }
+
+    .bit-led {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #475569;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .bit-toggle-btn.on .bit-led {
+      background: #34d399;
+      box-shadow: 0 0 10px #10b981, 0 0 4px #ffffff;
     }
 
     .bit-toggle-btn .b-weight {
@@ -645,18 +827,28 @@
     }
 
     .bit-toggle-btn.on .b-weight {
-      color: var(--bin-green);
-      font-weight: 700;
+      color: #6ee7b7;
+      font-weight: 800;
+    }
+
+    [data-theme="light"] .bit-toggle-btn.on .b-weight {
+      color: #047857;
     }
 
     .bit-toggle-btn .b-digit {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 900;
       font-family: var(--font-mono);
     }
 
     .bit-toggle-btn.on .b-digit {
-      color: var(--bin-green);
+      color: #34d399;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+
+    [data-theme="light"] .bit-toggle-btn.on .b-digit {
+      color: #047857;
+      text-shadow: none;
     }
 
     /* STEP-BY-STEP DIVISION TABLE */
@@ -723,6 +915,12 @@
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .example-level-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
     }
 
     .example-level-card.lvl-1 { border-top: 4px solid var(--lvl-easy); }
@@ -750,11 +948,12 @@
        ========================================== */
     .exercise-generator-box {
       background: linear-gradient(145deg, var(--bg-secondary), var(--bg-elevated));
-      border: 2px solid var(--bin-green);
+      border: 2.5px solid var(--bin-green);
       border-radius: var(--radius);
       padding: clamp(1rem, 2.5vw, 1.75rem);
       margin-bottom: 1.5rem;
-      box-shadow: 0 12px 35px rgba(16, 185, 129, 0.15);
+      box-shadow: 0 12px 35px rgba(16, 185, 129, 0.22), 0 0 0 1px rgba(16, 185, 129, 0.15);
+      position: relative;
     }
 
     .generator-grid {
@@ -767,32 +966,40 @@
 
     .gen-display-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--border-color);
       border-radius: 12px;
       padding: 1.15rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
     .big-number-problem {
-      background: var(--code-bg);
-      border: 2px solid var(--accent);
+      background: linear-gradient(135deg, #070b14, #0f172a);
+      border: 2.5px solid var(--accent);
       border-radius: 12px;
-      padding: 1rem;
+      padding: 1.1rem;
       text-align: center;
       margin: 0.85rem 0;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.22), inset 0 0 18px rgba(56, 189, 248, 0.08);
     }
 
     .big-number-problem .num-value {
       font-family: var(--font-mono);
-      font-size: clamp(1.5rem, 4vw, 2.35rem);
+      font-size: clamp(1.6rem, 4vw, 2.45rem);
       font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 0.04em;
+      color: #38bdf8;
+      letter-spacing: 0.05em;
       word-break: break-all;
+      text-shadow: 0 0 14px rgba(56, 189, 248, 0.45);
+      display: inline-block;
+    }
+
+    .num-pop-anim {
+      animation: numberPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .big-number-problem .num-sub {
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: #cbd5e1;
       margin-top: 0.25rem;
     }
 
@@ -808,49 +1015,53 @@
       min-width: 170px;
       background: var(--bg-elevated);
       color: var(--text-main);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
       padding: 0.65rem 0.9rem;
-      font-size: 1rem;
+      font-size: 1.02rem;
       font-family: var(--font-mono);
-      font-weight: 700;
+      font-weight: 800;
       outline: none;
+      transition: all 0.2s ease;
     }
 
     .answer-input:focus {
       border-color: var(--bin-green);
-      box-shadow: 0 0 0 3px var(--bin-bg);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
     }
 
     .feedback-banner {
       display: none;
       margin-top: 0.75rem;
-      padding: 0.7rem 0.95rem;
-      border-radius: 8px;
-      font-size: 0.88rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
       font-weight: 700;
+      animation: slideFadeIn 0.25s ease-out;
     }
 
     .feedback-banner.correct {
       display: block;
       background: var(--lvl-easy-bg);
       color: var(--lvl-easy);
-      border: 1px solid var(--lvl-easy);
+      border: 2px solid var(--lvl-easy);
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
     }
 
     .feedback-banner.wrong {
       display: block;
       background: var(--lvl-hard-bg);
       color: var(--lvl-hard);
-      border: 1px solid var(--lvl-hard);
+      border: 2px solid var(--lvl-hard);
     }
 
     .solution-panel {
       background: var(--bg-card);
-      border: 1px solid var(--border-color);
+      border: 2px solid var(--accent);
       border-radius: 12px;
       padding: 1.15rem;
       min-height: 220px;
+      box-shadow: 0 6px 22px rgba(56, 189, 248, 0.14);
     }
 
     /* PARTE 2 DETAILS & CHAPTERS */
@@ -1461,17 +1672,26 @@
           </div>
 
           <div>
-            <div class="concept-card">
-              <h3>🎛️ Prova tu! Simulatore Interattivo di 1 Byte (8 Bit)</h3>
-              <p style="font-size:0.83rem; color:var(--text-muted);">Tocca o clicca sui bit qui sotto per accenderli (<code>1</code>) o spegnerli (<code>0</code>) e osserva i pesi delle potenze di 2:</p>
+            <div class="concept-card interactive-zone-card">
+              <h3>
+                <span>🎛️ Prova tu! Simulatore di 1 Byte (8 Bit)</span>
+                <span class="interactive-live-badge"><span class="live-dot"></span> Interattivo • Clicca i bit</span>
+              </h3>
+              <p style="font-size:0.83rem; color:var(--text-muted);">Tocca o clicca sui singoli interruttori binari qui sotto per accenderli (<code>1</code>) o spegnerli (<code>0</code>) in tempo reale:</p>
               <div class="bit-interactive-strip" id="slideBitStrip">
                 <!-- Populated by JS -->
+              </div>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.55rem;">
+                <button type="button" class="btn" style="padding:0.28rem 0.6rem; min-height:30px; font-size:0.75rem;" onclick="setBytePreset(0)">🌑 Azzera (0)</button>
+                <button type="button" class="btn btn-green" style="padding:0.28rem 0.6rem; min-height:30px; font-size:0.75rem;" onclick="setBytePreset(255)">🌕 Tutti a 1 (255)</button>
+                <button type="button" class="btn btn-purple" style="padding:0.28rem 0.6rem; min-height:30px; font-size:0.75rem;" onclick="setBytePreset('invert')">🔄 Inverti Bit (NOT)</button>
+                <button type="button" class="btn btn-orange" style="padding:0.28rem 0.6rem; min-height:30px; font-size:0.75rem;" onclick="setBytePreset('random')">🎲 Byte Casuale</button>
               </div>
               <div class="formula-box" id="slideBitFormula" style="text-align:center;">
                 00010101₂ = 16 + 4 + 1 = 21₁₀
               </div>
               <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
-                <span style="font-size:0.8rem; color:var(--text-muted);">Potenze di 2 da sapere a memoria: <code>1, 2, 4, 8, 16, 32, 64, 128</code></span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Pesi: <code>128, 64, 32, 16, 8, 4, 2, 1</code></span>
                 <button class="btn btn-green" onclick="openChapterInGuide('cap-3')">📖 Cap. 3 Binario →</button>
               </div>
             </div>
@@ -2038,7 +2258,10 @@
       <section class="exercise-generator-box" id="gen-esercizi">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem;">
           <div>
-            <span class="lesson-tag" style="color:var(--bin-green);">Laboratorio Interattivo • Allenamento &amp; Verifica</span>
+            <div style="display:flex; align-items:center; gap:0.55rem; flex-wrap:wrap; margin-bottom:0.2rem;">
+              <span class="lesson-tag" style="color:var(--bin-green);">Laboratorio Interattivo • Allenamento &amp; Verifica</span>
+              <span class="interactive-live-badge"><span class="live-dot"></span> Interattivo Live</span>
+            </div>
             <h2 style="font-size:clamp(1.2rem, 2.5vw, 1.65rem); font-weight:900;">
               🎲 Generatore di Esercizi di Conversione Binario ↔ Decimale
             </h2>
@@ -2049,7 +2272,7 @@
           <div class="badge-group">
             <button class="btn btn-green" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(4);">🎞️ Slide 5 (Bin→Dec)</button>
             <button class="btn btn-green" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(5);">🎞️ Slide 6 (Dec→Bin)</button>
-            <span class="base-badge badge-bin" id="scoreBadge">✔️ Corretti: 0 / 0</span>
+            <span class="base-badge badge-bin" id="scoreBadge" style="font-size:0.85rem; padding:0.32rem 0.8rem;">✔️ Corretti: 0 / 0</span>
           </div>
         </div>
 
@@ -2075,11 +2298,11 @@
               </div>
             </div>
 
-            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <button class="btn btn-green" style="flex:1;" onclick="generateNewExercise()">
+            <div style="display:flex; gap:0.65rem; flex-wrap:wrap;">
+              <button class="btn btn-green btn-pulse-green" style="flex:1; font-size:0.9rem; padding:0.6rem 1rem;" onclick="generateNewExercise()">
                 🎲 Genera Nuovo Numero Casuale
               </button>
-              <button class="btn btn-orange" style="flex:1;" onclick="showExerciseSolution()">
+              <button class="btn btn-orange btn-pulse-orange" style="flex:1; font-size:0.9rem; padding:0.6rem 1rem;" onclick="showExerciseSolution()">
                 💡 Mostra Soluzione che Applica la Conversione
               </button>
             </div>
@@ -3018,6 +3241,7 @@
       btn.type = 'button';
       btn.className = 'bit-toggle-btn' + (val === 1 ? ' on' : '');
       btn.innerHTML = `
+        <span class="bit-led"></span>
         <span class="b-weight">2<sup>${bitPos}</sup>=${weight}</span>
         <span class="b-digit">${val}</span>
       `;
@@ -3036,10 +3260,23 @@
     const formulaEl = document.getElementById('slideBitFormula');
     if (formulaEl) {
       formulaEl.innerHTML = `
-        <strong>${binStr}₂</strong> = ${sumBreakdown} = <strong style="color:var(--accent); font-size:1.1rem;">${sum}₁₀</strong>
+        <strong>${binStr}₂</strong> = ${sumBreakdown} = <strong style="color:var(--accent); font-size:1.15rem;">${sum}₁₀</strong>
         <span style="color:var(--text-muted); font-size:0.82rem; margin-left:0.5rem;">(Ottale: ${octStr}₈ • Hex: ${hexStr}₁₆)</span>
       `;
     }
+  }
+
+  function setBytePreset(mode) {
+    if (mode === 0) {
+      for (let i = 0; i < 8; i++) byteState[i] = 0;
+    } else if (mode === 255) {
+      for (let i = 0; i < 8; i++) byteState[i] = 1;
+    } else if (mode === 'invert') {
+      for (let i = 0; i < 8; i++) byteState[i] = byteState[i] === 1 ? 0 : 1;
+    } else if (mode === 'random') {
+      for (let i = 0; i < 8; i++) byteState[i] = Math.random() < 0.5 ? 0 : 1;
+    }
+    renderSlideBitStrip();
   }
 
   // =========================================================================
@@ -3111,6 +3348,11 @@
       answerInput.placeholder = 'Es. 45';
     }
 
+    // Trigger animazione pop sul numero estratto
+    numDisplay.classList.remove('num-pop-anim');
+    void numDisplay.offsetWidth;
+    numDisplay.classList.add('num-pop-anim');
+
     solutionPanel.innerHTML = `
       <h3 style="font-size:1rem; color:var(--accent); margin-bottom:0.5rem;">
         📐 Svolgimento Passo-Passo Pronto
@@ -3118,7 +3360,7 @@
       <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.8rem;">
         Prova a calcolare la conversione di <strong>${direction === 'dec2bin' ? numDec + '₁₀' : currentExercise.numberBin + '₂'}</strong> e verifica la tua risposta, oppure clicca qui sotto per vedere subito applicato il procedimento completo passo-passo:
       </p>
-      <button class="btn btn-orange" onclick="showExerciseSolution()">
+      <button class="btn btn-orange btn-pulse-orange" onclick="showExerciseSolution()">
         💡 Mostra Soluzione che Applica la Conversione
       </button>
     `;
@@ -3473,6 +3715,9 @@
     const el = document.getElementById(chapterId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.classList.remove('chapter-highlight-flash');
+      void el.offsetWidth;
+      el.classList.add('chapter-highlight-flash');
     }
   }
 
