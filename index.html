@@ -1348,6 +1348,9 @@
               <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.4rem;">
                 💡 <strong>Notazione con pedice:</strong> Per evitare ambiguità (es. <code>10</code> vale dieci in decimale, ma vale due in binario!), si scrive la base come pedice: <code>10₂ = 2₁₀</code>, <code>10₈ = 8₁₀</code>, <code>10₁₆ = 16₁₀</code>.
               </p>
+              <div style="margin-top:0.75rem; display:flex; justify-content:flex-end;">
+                <button class="btn btn-primary" onclick="openChapterInGuide('cap-1')">📖 Approfondisci nel Cap. 1 →</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1551,6 +1554,7 @@
               </p>
               <div style="margin-top:0.65rem; display:flex; gap:0.5rem; justify-content:flex-end; flex-wrap:wrap;">
                 <button class="btn btn-green" onclick="openExerciseGenerator('bin2dec')">🎲 Esercitati su Bin → Dec</button>
+                <button class="btn btn-primary" onclick="openChapterInGuide('cap-4')">📖 Approfondisci nel Cap. 4 →</button>
               </div>
             </div>
           </div>
@@ -1639,8 +1643,9 @@
                 Leggendo i resti dal basso verso l'alto (⬆️): <strong>25₁₀ = 11001₂</strong><br>
                 Verifica: 16 + 8 + 0 + 0 + 1 = 25₁₀ ✅
               </div>
-              <div style="display:flex; justify-content:flex-end;">
+              <div style="display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
                 <button class="btn btn-green" onclick="openExerciseGenerator('dec2bin')">🎲 Esercitati su Dec → Bin</button>
+                <button class="btn btn-primary" onclick="openChapterInGuide('cap-4')">📖 Approfondisci nel Cap. 4 →</button>
               </div>
             </div>
           </div>
@@ -1804,6 +1809,10 @@
               <p style="font-size:0.84rem; color:var(--text-muted);">
                 🔄 <strong>E tra Ottale ed Esadecimale?</strong> Usa il <strong>Binario come ponte</strong>! Es: <code>271₈</code> → <code>010 111 001₂</code> → raggruppa a 4 bit <code>1011 1001₂</code> → <code>B9₁₆</code>!
               </p>
+              <div style="margin-top:0.65rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+                <button class="btn btn-orange" onclick="openChapterInGuide('cap-5')">📖 Cap. 5 Ottale →</button>
+                <button class="btn btn-purple" onclick="openChapterInGuide('cap-6')">📖 Cap. 6 Esadecimale →</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1926,6 +1935,10 @@
             </div>
           </div>
         </div>
+        <div style="margin-top:0.75rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="openChapterInGuide('cap-7')">📖 Vai a Cap. 7 (Aritmetica &amp; CA2) →</button>
+          <button class="btn btn-green" onclick="openExerciseGenerator()">🎲 Generatore Esercizi →</button>
+        </div>
       </article>
 
       <!-- SLIDE 12: PONTE VERSO IL GENERATORE DI ESERCIZI E PARTE 2 -->
@@ -2034,6 +2047,8 @@
             </p>
           </div>
           <div class="badge-group">
+            <button class="btn btn-green" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(4);">🎞️ Slide 5 (Bin→Dec)</button>
+            <button class="btn btn-green" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(5);">🎞️ Slide 6 (Dec→Bin)</button>
             <span class="base-badge badge-bin" id="scoreBadge">✔️ Corretti: 0 / 0</span>
           </div>
         </div>
@@ -2125,6 +2140,7 @@
           <div class="badge-group">
             <span class="base-badge badge-dec">Teorema Posizionale</span>
             <span class="base-badge badge-bin">Base b ≥ 2</span>
+            <button class="btn btn-orange" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(0);" title="Vai alle Slide 1 e 2">🎞️ Vedi nelle Slide (Slide 1-2)</button>
           </div>
         </div>
 
@@ -2214,6 +2230,11 @@
             </div>
           </div>
         </div>
+
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-orange" onclick="switchMode('slides'); goToSlide(0);">🎞️ Vai alla Slide 1: Cosa sono</button>
+          <button class="btn btn-orange" onclick="switchMode('slides'); goToSlide(1);">🎞️ Vai alla Slide 2: Base e Polinomi</button>
+        </div>
       </article>
 
       <!-- ===================================================================
@@ -2228,6 +2249,7 @@
           <div class="badge-group">
             <span class="base-badge badge-dec">Base b = 10</span>
             <span class="base-badge badge-dec">Alfabeto: {0,1,2,3,4,5,6,7,8,9}</span>
+            <button class="btn btn-primary" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(2);" title="Vai alla Slide 3">🎞️ Vedi nella Slide (Slide 3)</button>
           </div>
         </div>
 
@@ -2318,6 +2340,10 @@
             </div>
           </div>
         </div>
+
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="switchMode('slides'); goToSlide(2);">🎞️ Torna alla Slide 3: Sistema Decimale (Base 10)</button>
+        </div>
       </article>
 
       <!-- ===================================================================
@@ -2333,6 +2359,7 @@
             <span class="base-badge badge-bin">Base b = 2</span>
             <span class="base-badge badge-bin">Alfabeto: {0, 1}</span>
             <span class="base-badge badge-dec">2ⁿ Combinazioni</span>
+            <button class="btn btn-green" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(3);" title="Vai alla Slide 4">🎞️ Vedi nella Slide (Slide 4 • Bit interattivi)</button>
           </div>
         </div>
 
@@ -2433,6 +2460,10 @@
             </div>
           </div>
         </div>
+
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-green" onclick="switchMode('slides'); goToSlide(3);">🎞️ Torna alla Slide 4: Sistema Binario &amp; Byte Interattivo</button>
+        </div>
       </article>
 
       <!-- ===================================================================
@@ -2447,6 +2478,8 @@
           <div class="badge-group">
             <span class="base-badge badge-bin">Somma Pesata &amp; Horner</span>
             <span class="base-badge badge-dec">Divisioni &amp; Sottrazione</span>
+            <button class="btn btn-green" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(4);" title="Vai alla Slide 5">🎞️ Slide 5 (Bin→Dec)</button>
+            <button class="btn btn-green" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(5);" title="Vai alla Slide 6">🎞️ Slide 6 (Dec→Bin)</button>
           </div>
         </div>
 
@@ -2571,8 +2604,10 @@
           </div>
         </div>
 
-        <div style="margin-top:1rem; display:flex; justify-content:flex-end;">
-          <button class="btn btn-green" onclick="scrollToChapter('gen-esercizi')">🎲 Vai al Generatore di Esercizi Binario ↔ Decimale ↑</button>
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-green" onclick="switchMode('slides'); goToSlide(4);">🎞️ Slide 5 (Bin➔Dec)</button>
+          <button class="btn btn-green" onclick="switchMode('slides'); goToSlide(5);">🎞️ Slide 6 (Dec➔Bin)</button>
+          <button class="btn btn-primary" onclick="scrollToChapter('gen-esercizi')">🎲 Vai al Generatore di Esercizi Binario ↔ Decimale ↑</button>
         </div>
       </article>
 
@@ -2589,6 +2624,8 @@
             <span class="base-badge badge-oct">Base b = 8</span>
             <span class="base-badge badge-oct">Cifre: {0,1,2,3,4,5,6,7}</span>
             <span class="base-badge badge-bin">8 = 2³ (3 bit)</span>
+            <button class="btn btn-orange" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(6);" title="Vai alla Slide 7">🎞️ Slide 7 (Ottale)</button>
+            <button class="btn btn-orange" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(8);" title="Vai alla Slide 9">🎞️ Slide 9 (Terne 3 bit)</button>
           </div>
         </div>
 
@@ -2679,6 +2716,11 @@
             </div>
           </div>
         </div>
+
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-orange" onclick="switchMode('slides'); goToSlide(6);">🎞️ Vai alla Slide 7: Sistema Ottale</button>
+          <button class="btn btn-orange" onclick="switchMode('slides'); goToSlide(8);">🎞️ Vai alla Slide 9: Conversioni Rapide 2-8-16</button>
+        </div>
       </article>
 
       <!-- ===================================================================
@@ -2694,6 +2736,8 @@
             <span class="base-badge badge-hex">Base b = 16</span>
             <span class="base-badge badge-hex">0..9 + A,B,C,D,E,F</span>
             <span class="base-badge badge-bin">16 = 2⁴ (4 bit = 1 Nibble)</span>
+            <button class="btn btn-purple" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(7);" title="Vai alla Slide 8">🎞️ Slide 8 (Esadecimale)</button>
+            <button class="btn btn-purple" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(8);" title="Vai alla Slide 9">🎞️ Slide 9 (Quartine 4 bit)</button>
           </div>
         </div>
 
@@ -2790,6 +2834,11 @@
             </div>
           </div>
         </div>
+
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-purple" onclick="switchMode('slides'); goToSlide(7);">🎞️ Vai alla Slide 8: Sistema Esadecimale</button>
+          <button class="btn btn-purple" onclick="switchMode('slides'); goToSlide(8);">🎞️ Vai alla Slide 9: Conversioni Rapide 2-8-16</button>
+        </div>
       </article>
 
       <!-- ===================================================================
@@ -2804,6 +2853,8 @@
           <div class="badge-group">
             <span class="base-badge badge-bin">Addizione &amp; Sottrazione</span>
             <span class="base-badge badge-hex">Complemento a 2 (CA2)</span>
+            <button class="btn btn-primary" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(9);" title="Vai alla Slide 10">🎞️ Slide 10 (Somma &amp; Overflow)</button>
+            <button class="btn" style="font-size:0.78rem; padding:0.35rem 0.65rem;" onclick="switchMode('slides'); goToSlide(10);" title="Vai alla Slide 11">🎞️ Slide 11 (Tabella 0-15)</button>
           </div>
         </div>
 
@@ -2882,6 +2933,12 @@
               Risultato su 8 bit: <code>00000111₂</code> = <strong>+7₁₀</strong> ✅
             </div>
           </div>
+        </div>
+
+        <div style="margin-top:1rem; display:flex; justify-content:flex-end; gap:0.5rem; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="switchMode('slides'); goToSlide(9);">🎞️ Torna alla Slide 10: Aritmetica Binaria</button>
+          <button class="btn" onclick="switchMode('slides'); goToSlide(10);">🎞️ Vedi Slide 11: Tabella 0-15</button>
+          <button class="btn btn-green" onclick="scrollToChapter('gen-esercizi')">🎲 Allenati con il Generatore Esercizi ↑</button>
         </div>
       </article>
 
